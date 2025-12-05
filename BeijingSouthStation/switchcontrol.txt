@@ -1,0 +1,16 @@
+Switch_2_G13_sh
+0
+Switch_2_G13_xi
+1
+Switch_3_G7
+2
+Switch_3_G5
+3
+Switch_2_G24_sh
+4
+Switch_2_G24_xi
+5
+Switch_3_G8
+6
+Switch_3_G6
+7

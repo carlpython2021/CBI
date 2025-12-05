@@ -1,0 +1,1504 @@
+﻿using System;
+using System.IO;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using ConLib;
+using System.Collections;
+using System.Net;
+using System.Net.Sockets;
+using System.Threading;
+using System.Runtime.InteropServices;
+using System.Drawing.Drawing2D;
+
+namespace NanJingNanStation
+{
+    public partial class 南京南站 : Form
+    {
+        const string POSTION = "7";
+        const string PLAN = "2";
+        const string DELETE = "3";
+        const string TIME = "9";
+        const string ACCIDENT = "10";
+        const string STOPSTATION = "NJ";
+        const string DOWNINTEVAL_1 = "X4";
+        const string UPINTEVAL_1 = "S4";
+        const string DOWNINTEVAL_2 = "X5";
+        const string UPINTEVAL_2 = "S5";
+        const string UP_ARRIVE_BLOCK = "S5_10";
+        const string DOWN_ARRIVE_BLOCK = "X4_13";
+        const string ARRIVE = "Ar";
+        const string DEPARTURE = "De";
+        const string DOWN_DIRECTION = "下";
+        const string UP_DIRECTION = "上";
+        const string SEPARATOR = "$";
+        const char CSEPARATOR = '$';
+        const string IP = "192.168.1.8";
+        const int PORT = 1029;
+        const string RBCIP = "192.168.1.3";
+        const int RBCPORT = 180;
+        const string CTCIP = "192.168.1.5";
+        const int CTCPORT = 180;
+        const string DOWNDIRECTION = "北京 --> 上海";
+        const string UPDIRECTION = "上海 --> 北京";
+        Hashtable stationTracks = new Hashtable();
+        Hashtable singleTracks = new Hashtable();
+        Hashtable intervalTracks = new Hashtable();
+        Hashtable switches = new Hashtable();
+        Hashtable signals = new Hashtable();
+        Hashtable interlocks = new Hashtable();
+        Hashtable trains = new Hashtable();
+        Hashtable trainToTrack = new Hashtable();
+        Hashtable upDownState = new Hashtable();
+        Hashtable timeToInterlock = new Hashtable();
+        Hashtable trainScheduleInfo = new Hashtable();
+        Hashtable trainToInterlock = new Hashtable();
+        Hashtable codeOrders = new Hashtable();
+        List<string> routes = new List<string>();
+        static Socket server;
+        int upBlockNum_1 = 0, downBlockNum_1 = 0;
+        int upBlockNum_2 = 0, downBlockNum_2 = 0;
+        int dataGridId = 1;
+        public 南京南站()
+        {
+            InitializeComponent();
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            initializeInterface();
+            readInterlockTable();
+            server = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            server.Bind(new IPEndPoint(IPAddress.Parse(IP), PORT));
+            new Thread(receivevMessage).Start();
+        }
+        private void initializeInterface()
+        {
+            interlocks.Clear();
+            singleTracks.Clear();
+            stationTracks.Clear();
+            switches.Clear();
+            initializeDataGrid();
+            addControllers();
+            addCodeOrders();
+        }
+        private void readInterlockTable()
+        {
+            string key;
+            string value;
+            StreamReader sr = null;
+            interlocks.Clear();
+            try
+            {
+                sr = new StreamReader(@"..\..\interlock.txt");
+                while (!sr.EndOfStream)
+                {
+                    key = sr.ReadLine();
+                    if (key.StartsWith("//"))
+                    {
+                        continue;
+                    }
+                    value = sr.ReadLine();
+                    interlocks.Add(key, value);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Console.Write("读取文件出错");
+            }
+            finally
+            {
+                sr.Close();
+            }
+        }
+        private void initializeDataGrid()
+        {
+            dataGridView1.ColumnCount = 11;
+            dataGridView1.ColumnHeadersVisible = true;
+            for (int i = 0; i < dataGridView1.ColumnCount; i++)
+            {
+                dataGridView1.Columns[i].Width = dataGridView1.Width / 11;
+            }
+            dataGridView1.Columns[0].Name = "序号";
+            dataGridView1.Columns[1].Name = "车次";
+            dataGridView1.Columns[2].Name = "计划时间";
+            dataGridView1.Columns[3].Name = "触发条件";
+            dataGridView1.Columns[4].Name = "股道";
+            dataGridView1.Columns[5].Name = "进路类型";
+            dataGridView1.Columns[6].Name = "进路名称";
+            dataGridView1.Columns[7].Name = "触发方式";
+            dataGridView1.Columns[8].Name = "方向";
+            dataGridView1.Columns[9].Name = "状态";
+            dataGridView1.Columns[10].Name = "未执行的作业";
+        }
+        private void addControllers()
+        {
+            foreach (Control con in this.Controls)
+            {
+                if (con.Name.Contains("StationTrack"))
+                {
+                    SingleTrack_WithIJ stationTrack = (SingleTrack_WithIJ)con;
+                    stationTrack.ID = con.Name.Split('_')[1];
+                    stationTracks.Add(con.Name, stationTrack);
+                }
+                else if (con.Name.Contains("SingleTrack"))
+                {
+                    SingleTrack_WithIJ singleTrack = (SingleTrack_WithIJ)con;
+                    singleTrack.ID = con.Name.Split('_')[1];
+                    singleTracks.Add(con.Name, singleTrack);
+                }
+                else if (con.Name.Contains("QujianTrack"))
+                {
+                    SingleTrack_WithIJ singleTrack = (SingleTrack_WithIJ)con;
+                    singleTrack.ID = con.Name.Split('_')[1] + "_" + con.Name.Split('_')[2];
+                    switch (con.Name.Split('_')[1])
+                    {
+                        case UPINTEVAL_2:
+                            upBlockNum_2++;
+                            break;
+                        case DOWNINTEVAL_2:
+                            downBlockNum_2++;
+                            break;
+                        case DOWNINTEVAL_1:
+                            downBlockNum_1++;
+                            break;
+                        case UPINTEVAL_1:
+                            upBlockNum_1++;
+                            break;
+                    }
+                    intervalTracks.Add(con.Name, singleTrack);
+                }
+                else if (con.Name.Contains("Switch_3"))
+                {
+                    Switch_3 switch_3 = (Switch_3)con;
+                    string[] str = con.Name.Split('_');
+                    switch_3.道岔ID号 = str[1];
+                    switches.Add(con.Name, switch_3);
+                }
+                else if (con.Name.Contains("Switch_2"))
+                {
+                    Switch_2 switch_2 = (Switch_2)con;
+                    string[] str = con.Name.Split('_');
+                    switches.Add(con.Name, switch_2);
+                }
+                else if (con.Name.Contains("Signal"))
+                {
+                    Signal xinhaoji = (Signal)con;
+                    signals.Add(con.Name, xinhaoji);
+                }
+            }
+        }
+        private void addCodeOrders()
+        {
+            foreach (string name in intervalTracks.Keys)
+            {
+                string[] str = name.Split('_');
+                CodeOrder co = new CodeOrder();
+                co.Location = new System.Drawing.Point(
+                    Convert.ToInt32(((SingleTrack_WithIJ)intervalTracks[name]).Location.X) +
+                    ((SingleTrack_WithIJ)intervalTracks[name]).Width / 2 - co.Width / 2,
+                    Convert.ToInt32(((SingleTrack_WithIJ)intervalTracks[name]).Location.Y) - 3);
+                switch (str[1])
+                {
+                    case UPINTEVAL_2:
+                        co.上下行方向 = CodeOrder.Direction.上行;
+                        if (Convert.ToInt32(str[2]) == upBlockNum_2)
+                        {
+                            co.显示状态 = CodeOrder.CodeView.红黄;
+                        }
+                        else if (Convert.ToInt32(str[2]) == (upBlockNum_2 - 1))
+                        {
+                            co.显示状态 = CodeOrder.CodeView.黄;
+                        }
+                        else if (Convert.ToInt32(str[2]) == (upBlockNum_2 - 2))
+                        {
+                            co.显示状态 = CodeOrder.CodeView.黄绿;
+                        }
+                        else
+                        {
+                            co.显示状态 = CodeOrder.CodeView.绿;
+                        }
+                        break;
+                    case DOWNINTEVAL_2:
+                        co.上下行方向 = CodeOrder.Direction.下行;
+                        if (Convert.ToInt32(str[2]) == downBlockNum_2)
+                        {
+                            co.显示状态 = CodeOrder.CodeView.红黄;
+                        }
+                        else if (Convert.ToInt32(str[2]) == (downBlockNum_2 - 1))
+                        {
+                            co.显示状态 = CodeOrder.CodeView.黄;
+                        }
+                        else if (Convert.ToInt32(str[2]) == (downBlockNum_2 - 2))
+                        {
+                            co.显示状态 = CodeOrder.CodeView.黄绿;
+                        }
+                        else
+                        {
+                            co.显示状态 = CodeOrder.CodeView.绿;
+                        }
+                        break;
+                    case UPINTEVAL_1:
+                        co.上下行方向 = CodeOrder.Direction.上行;
+                        if (Convert.ToInt32(str[2]) == upBlockNum_1)
+                        {
+                            co.显示状态 = CodeOrder.CodeView.红黄;
+                        }
+                        else if (Convert.ToInt32(str[2]) == (upBlockNum_1 - 1))
+                        {
+                            co.显示状态 = CodeOrder.CodeView.黄;
+                        }
+                        else if (Convert.ToInt32(str[2]) == (upBlockNum_1 - 2))
+                        {
+                            co.显示状态 = CodeOrder.CodeView.黄绿;
+                        }
+                        else
+                        {
+                            co.显示状态 = CodeOrder.CodeView.绿;
+                        }
+                        break;
+                    case DOWNINTEVAL_1:
+                        co.上下行方向 = CodeOrder.Direction.下行;
+                        if (Convert.ToInt32(str[2]) == downBlockNum_1)
+                        {
+                            co.显示状态 = CodeOrder.CodeView.红黄;
+                        }
+                        else if (Convert.ToInt32(str[2]) == (downBlockNum_1 - 1))
+                        {
+                            co.显示状态 = CodeOrder.CodeView.黄;
+                        }
+                        else if (Convert.ToInt32(str[2]) == (downBlockNum_1 - 2))
+                        {
+                            co.显示状态 = CodeOrder.CodeView.黄绿;
+                        }
+                        else
+                        {
+                            co.显示状态 = CodeOrder.CodeView.绿;
+                        }
+                        break;
+                }
+                this.Controls.Add(co);
+                co.BringToFront();
+                codeOrders.Add(name, co);
+            }
+        }
+        private void lockRoute(string Interlock_Info)
+        {
+            if (Interlock_Info != null)
+            {
+                string Interlock_str = (string)interlocks[Interlock_Info];
+                string[] str;
+                if (Interlock_str != null)
+                {
+                    str = Interlock_str.Split('&');
+                    foreach (string tempName in str)
+                    {
+                        string name;
+                        name = tempName.Split('#')[0];
+                        if (name.Contains("StationTrack"))
+                        {
+                            if (((SingleTrack_WithIJ)stationTracks[name]) != null)
+                            {
+                                if (((SingleTrack_WithIJ)stationTracks[name]).flag_zt != 3)
+                                {
+                                    string s = name.Replace("StationTrack", "Xinhaoji");
+                                    if (Interlock_Info.Split('&')[1].Split('_')[1] == "SFC" ||
+                                        Interlock_Info.Split('&')[1].Split('_')[1] == "SJC")
+                                    {
+                                        s = s + "_S";
+                                    }
+                                    else
+                                    {
+                                        s = s + "_X";
+                                    }
+                                    ((Signal)signals[s]).信号灯状态 = 3;
+                                }
+                                else
+                                {
+                                    if (Interlock_Info.Split('&')[1].Split('_')[1] == "SFC" ||
+                                        Interlock_Info.Split('&')[1].Split('_')[1] == "XFC")
+                                    {
+                                        string s = name.Replace("StationTrack", "Xinhaoji");
+                                        if (Interlock_Info.Split('&')[1].Split('_')[1] == "SFC" ||
+                                            Interlock_Info.Split('&')[1].Split('_')[1] == "SJC")
+                                        {
+                                            s = s + "_S";
+                                        }
+                                        else
+                                        {
+                                            s = s + "_X";
+                                        }
+                                    ((Signal)signals[s]).信号灯状态 = 3;
+                                    }
+                                }
+                                if (((SingleTrack_WithIJ)stationTracks[name]).flag_zt != 1)
+                                {
+                                    ((SingleTrack_WithIJ)stationTracks[name]).flag_zt = 2;
+                                    ((SingleTrack_WithIJ)stationTracks[name]).Drawpic();
+                                }
+                            }
+
+                        }
+                        else if (name.Contains("SingleTrack"))
+                        {
+                            if (((SingleTrack_WithIJ)singleTracks[name]) != null)
+                            {
+                                ((SingleTrack_WithIJ)singleTracks[name]).flag_zt = 2;
+                                ((SingleTrack_WithIJ)singleTracks[name]).Drawpic();
+                                if (name.Split('_')[1].Contains("XFC") || name.Split('_')[1].Contains("XJC")
+                                    || name.Split('_')[1].Contains("SFC") || name.Split('_')[1].Contains("SJC"))
+                                {
+                                    string s = name.Replace("SingleTrack", "Xinhaoji");
+                                    ((Signal)signals[s]).信号灯状态 = 3;
+                                }
+                            }
+                        }
+                        else if (name.Contains("Switch_3"))
+                        {
+                            if (((Switch_3)switches[name]) != null)
+                            {
+                                bool dir = tempName.Split('#')[1] == "D";
+                                if (dir)
+                                {
+                                    ((Switch_3)switches[name]).定反位 = Switch_3.DingFan.定位;
+                                }
+                                else
+                                {
+                                    ((Switch_3)switches[name]).定反位 = Switch_3.DingFan.反位;
+                                }
+                                ((Switch_3)switches[name]).锁闭状态 = Switch_3.STATE.锁闭;
+                                ((Switch_3)switches[name]).SendToBack();
+                                dir = false;
+                            }
+
+                        }
+                        else
+                        {
+                            string direction;
+                            string information;
+                            direction = tempName.Split('%')[1];
+                            information = tempName.Split('#')[1];
+                            if (((Switch_2)switches[name]) != null)
+                            {
+                                if (information.Split('%')[0] == "F")
+                                {
+                                    ((Switch_2)switches[name]).定反位 = ConLib.Switch_2.DingFan.反位;
+                                    ((Switch_2)switches[name]).反位锁闭状态 = ConLib.Switch_2.STATE.锁闭;
+                                }
+                                else
+                                {
+                                    ((Switch_2)switches[name]).定反位 = ConLib.Switch_2.DingFan.定位;
+                                    if (direction == "S")
+                                    {
+                                        ((Switch_2)switches[name]).锁闭状态上 = ConLib.Switch_2.STATE.锁闭;
+                                    }
+                                    else
+                                    {
+                                        ((Switch_2)switches[name]).锁闭状态下 = ConLib.Switch_2.STATE.锁闭;
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    routes.Add(Interlock_Info);
+                }
+            }
+
+        }
+        private void clearRoute(string Interlock_Info)
+        {
+            if (Interlock_Info != null)
+            {
+                string Interlock_str = (string)interlocks[Interlock_Info];
+                string[] str;
+                if (Interlock_str != null)
+                {
+                    str = Interlock_str.Split('&');
+                    foreach (string tempName in str)
+                    {
+                        string name;
+                        name = tempName.Split('#')[0];
+                        if (name.Contains("StationTrack"))
+                        {
+                            if (((SingleTrack_WithIJ)stationTracks[name]) != null)
+                            {
+                                if (((SingleTrack_WithIJ)stationTracks[name]).flag_zt == 2)
+                                {
+                                    string s = name.Replace("StationTrack", "Xinhaoji");
+                                    if (Interlock_Info.Split('&')[1].Split('_')[1] == "SFC" ||
+                                        Interlock_Info.Split('&')[1].Split('_')[1] == "SJC")
+                                    {
+                                        s = s + "_S";
+                                    }
+                                    else
+                                    {
+                                        s = s + "_X";
+                                    }
+                                    ((Signal)signals[s]).信号灯状态 = 5;
+                                }
+                                if (((SingleTrack_WithIJ)stationTracks[name]).flag_zt != 1)
+                                {
+                                    ((SingleTrack_WithIJ)stationTracks[name]).flag_zt = 3;
+                                    ((SingleTrack_WithIJ)stationTracks[name]).Drawpic();
+                                }
+                            }
+
+                        }
+                        else if (name.Contains("SingleTrack"))
+                        {
+                            if (((SingleTrack_WithIJ)singleTracks[name]) != null)
+                            {
+                                ((SingleTrack_WithIJ)singleTracks[name]).flag_zt = 3;
+                                ((SingleTrack_WithIJ)singleTracks[name]).Drawpic();
+                                if (name.Split('_')[1].Contains("XFC") || name.Split('_')[1].Contains("XJC")
+                                    || name.Split('_')[1].Contains("SFC") || name.Split('_')[1].Contains("SJC"))
+                                {
+                                    string s = name.Replace("SingleTrack", "Xinhaoji");
+                                    ((Signal)signals[s]).信号灯状态 = 5;
+                                }
+                            }
+                        }
+                        else if (name.Contains("Switch_3"))
+                        {
+                            ((Switch_3)switches[name]).定反位 = Switch_3.DingFan.定位;
+                            ((Switch_3)switches[name]).锁闭状态 = Switch_3.STATE.空闲;
+                        }
+                        else
+                        {
+                            string direction;
+                            string information;
+                            direction = tempName.Split('%')[1];
+                            information = tempName.Split('#')[1];
+
+                            if (((Switch_2)switches[name]) != null)
+                            {
+                                if (information.Split('%')[0] == "F")
+                                {
+                                    ((Switch_2)switches[name]).反位锁闭状态 = ConLib.Switch_2.STATE.空闲;
+                                }
+                                else
+                                {
+                                    if (direction == "S")
+                                    {
+                                        ((Switch_2)switches[name]).锁闭状态上 = ConLib.Switch_2.STATE.空闲;
+                                    }
+                                    else
+                                    {
+                                        ((Switch_2)switches[name]).锁闭状态下 = ConLib.Switch_2.STATE.空闲;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    routes.Remove(Interlock_Info);
+                }
+            }
+        }
+        private bool isConflict(string key, string Interlock_Info)
+        {
+            bool Admit = true;
+            if (Interlock_Info != null)
+            {
+                string Interlock_str = (string)interlocks[Interlock_Info];
+                string[] str;
+                if (Interlock_str != null)
+                {
+                    str = Interlock_str.Split('&');
+                    foreach (string tempName in str)
+                    {
+                        string name;
+                        name = tempName.Split('#')[0];
+                        if (name.Contains("StationTrack"))
+                        {
+                            if (((SingleTrack_WithIJ)stationTracks[name]) != null)
+                            {
+                                if (((SingleTrack_WithIJ)stationTracks[name]).flag_zt != 3)
+                                {
+                                    if (key.Contains(ARRIVE))
+                                    {
+                                        Admit = false;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        else if (name.Contains("SingleTrack"))
+                        {
+                            if (((SingleTrack_WithIJ)singleTracks[name]) != null)
+                            {
+                                if (((SingleTrack_WithIJ)singleTracks[name]).flag_zt != 3)
+                                {
+                                    Admit = false;
+                                    break;
+                                }
+                            }
+                        }
+                        else if (name.Contains("Switch_3"))
+                        {
+                            if (((Switch_3)switches[name]) != null)
+                            {
+                                if (((Switch_3)switches[name]).锁闭状态 != Switch_3.STATE.空闲)
+                                {
+                                    Admit = false;
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            string direction;
+                            string information;
+                            direction = tempName.Split('%')[1];
+                            information = tempName.Split('#')[1];
+
+                            if (((Switch_2)switches[name]) != null)
+                            {
+                                if (information.Split('%')[0] == "F")
+                                {
+                                    if (((Switch_2)switches[name]).反位锁闭状态 != Switch_2.STATE.空闲 ||
+                                        ((Switch_2)switches[name]).锁闭状态上 != Switch_2.STATE.空闲 ||
+                                        ((Switch_2)switches[name]).锁闭状态下 != Switch_2.STATE.空闲)
+                                    {
+                                        Admit = false;
+                                        break;
+                                    }
+                                }
+                                else
+                                {
+                                    if (direction == "S")
+                                    {
+                                        if (((Switch_2)switches[name]).锁闭状态上 != ConLib.Switch_2.STATE.空闲)
+                                        {
+                                            Admit = false;
+                                            break;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (((Switch_2)switches[name]).锁闭状态下 != ConLib.Switch_2.STATE.空闲)
+                                        {
+                                            Admit = false;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+            return Admit;
+        }
+        public void receivevMessage()
+        {
+            while (true)
+            {
+                EndPoint point = new IPEndPoint(IPAddress.Any, 0);//用来保存发送方的ip和端口号
+                byte[] buffer = new byte[1024 * 1024];
+                int length = server.ReceiveFrom(buffer, ref point);//接收数据报
+                if (length == 0)
+                {
+                    break;
+                }
+                string message = Encoding.ASCII.GetString(buffer, 0, length);
+                if (message != null)
+                {
+                    new Thread(onConnect).Start(message);
+                }
+            }
+        }
+        private void onConnect(object mess)
+        {
+            string message = (string)mess;
+            string messType = message.Split('|')[0];
+            switch (messType)
+            {
+                case POSTION:
+                    positionHandle(message);
+                    break;
+                case PLAN:
+                    handlePlan(message);
+                    break;
+                case DELETE:
+                    handledelete(message);
+                    break;
+                case TIME:
+                    handleTime(message);
+                    break;
+                case ACCIDENT:
+                    handleAccident(message);
+                    break;
+            }
+        }
+        private void positionHandle(string message)
+        {
+            string Dir;
+            //获取列车车次号、位置以及方向
+            string Train_ID = message.Split('|')[2];
+            string Train_Position = message.Split('|')[3];
+            string Train_Direction = message.Split('|')[4];
+            string Train_position = Train_Position;
+            //如果是一辆新注册列车，默认为发车
+            if (!upDownState.ContainsKey(Train_ID))
+            {
+                upDownState.Add(Train_ID, DEPARTURE);
+            }
+            //判断列车上下行方向
+            if (Train_Direction == "1")
+            {
+                Dir = DOWN_DIRECTION;
+            }
+            else
+            {
+                Dir = UP_DIRECTION;
+            }
+            //判断是在区间还是车站内
+            if (Train_Position.Contains("K"))
+            {
+                //获取列车目前在车站的具体坐标
+                string[] str = Train_Position.Split('+');
+                int dis = Convert.ToInt32(str[1]);
+                string route = null;
+                //遍历所有进路
+                foreach (string key in trainToInterlock.Keys)
+                {
+                    //判断具体属于哪一个进路
+                    if (key == Train_ID + STOPSTATION + upDownState[Train_ID] + Dir)
+                    {
+                        //获取列车所在进路的进路表
+                        route = ((string)interlocks[(string)trainToInterlock[key]]);
+                        string[] str1 = route.Split('&');
+
+                        //遍历进路表中所有轨道控件，判断当前列车具体所在轨道
+                        foreach (string s in str1)
+                        {
+                            string controlname = s.Split('#')[0];
+                            if (controlname.Contains("Switch_2"))
+                            {
+                                string loc = ((Switch_2)switches[controlname]).
+								;
+                                int zuo = Convert.ToInt32(loc.Split(',')[0]);
+                                int you = Convert.ToInt32(loc.Split(',')[1]);
+                                if (dis >= zuo && dis <= you)
+                                {
+                                    Train_position = ((Switch_2)switches[controlname]).Name;
+                                    break;
+                                }
+                            }
+                            else if (controlname.Contains("Switch_3"))
+                            {
+                                string loc = ((Switch_3)switches[controlname]).实际位置;
+                                int zuo = Convert.ToInt32(loc.Split(',')[0]);
+                                int you = Convert.ToInt32(loc.Split(',')[1]);
+                                if (dis >= zuo && dis <= you)
+                                {
+                                    Train_position = ((Switch_3)switches[controlname]).Name;
+                                    break;
+                                }
+                            }
+                            else if (controlname.Contains("SingleTrack"))
+                            {
+                                string loc = ((SingleTrack_WithIJ)singleTracks[controlname]).实际位置;
+                                int zuo = Convert.ToInt32(loc.Split(',')[0]);
+                                int you = Convert.ToInt32(loc.Split(',')[1]);
+                                if (dis >= zuo && dis <= you)
+                                {
+                                    Train_position = ((SingleTrack_WithIJ)singleTracks[controlname]).Name;
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                string loc = ((SingleTrack_WithIJ)stationTracks[controlname]).实际位置;
+                                int zuo = Convert.ToInt32(loc.Split(',')[0]);
+                                int you = Convert.ToInt32(loc.Split(',')[1]);
+                                if (dis >= zuo && dis <= you)
+                                {
+                                    Train_position = ((SingleTrack_WithIJ)stationTracks[controlname]).Name;
+                                    break;
+                                }
+                            }
+                        }
+                        //移动列车
+                        updateTrainPosition(Train_ID, Train_position, Train_Direction);
+                        string stationtrack;
+                        //判断是否为新注册列车
+                        if (((Train)trains[Train_ID]).Train_Location != null)
+                        {
+                            //判断是否到站
+                            if (!((Train)trains[Train_ID]).Train_Location.Contains("StationTrack") &&
+                                Train_position.Contains("StationTrack"))
+                            {
+                                clearRoute((string)trainToInterlock[key]);
+                                trainToInterlock.Remove(key);
+
+                                stationtrack = ((string)trainScheduleInfo[key]).Split(CSEPARATOR)[1].Split('&')[0].Split('_')[1];
+                                sendMessageToCTC(DataConvert.subCTCToCTC(Train_ID, "0", STOPSTATION,
+                                    Convert.ToDateTime(((string)trainScheduleInfo[key]).Split(CSEPARATOR)[0]), DateTime.Now,
+                                    Convert.ToInt32(stationtrack.Substring(1, stationtrack.Length - 1))));
+                                upDownState[Train_ID] = DEPARTURE;
+                            }
+                            //判断是否出站
+                            if (((Train)trains[Train_ID]).Train_Location.Contains("StationTrack") &&
+                                !Train_position.Contains("StationTrack"))
+                            {
+                                upDownState[Train_ID] = DEPARTURE;
+                                string s = ((Train)trains[Train_ID]).Train_Location.Replace("StationTrack", "Signal");
+                                if (Convert.ToInt32(Train_Direction) == 1)
+                                {
+                                    s = s + "_X";
+                                }
+                                else
+                                {
+                                    s = s + "_S";
+                                }
+                                ((Signal)signals[s]).信号灯状态 = 5;
+
+                                stationtrack = ((string)trainScheduleInfo[key]).Split(CSEPARATOR)[1].Split('&')[0].Split('_')[1];
+                                sendMessageToCTC(DataConvert.subCTCToCTC(Train_ID, "1", STOPSTATION,
+                                    Convert.ToDateTime(((string)trainScheduleInfo[key]).Split(CSEPARATOR)[0]), DateTime.Now,
+                                    Convert.ToInt32(stationtrack.Substring(1, stationtrack.Length - 1))));
+                            }
+                        }
+                        ((Train)trains[Train_ID]).Train_Location = Train_position;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                upDownState[Train_ID] = ARRIVE;
+                string key;
+                string key1;
+                string r;
+                switch (Train_Position)
+                {
+                    case DOWN_ARRIVE_BLOCK:
+                        key = Train_ID + STOPSTATION + ARRIVE + DOWN_DIRECTION;
+                        key1 = Train_ID + STOPSTATION + DEPARTURE + DOWN_DIRECTION;
+                        if (timeToInterlock.ContainsKey(key))
+                        {
+                            r = ((string)timeToInterlock[key]).Split(CSEPARATOR)[1];
+                            if (isConflict(key, r))
+                            {
+                                lockRoute(r);
+                                sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
+                                    "|" + Train_ID + "|" + STOPSTATION + "|" + "1" + "|" + "7" + "|" + "1"));
+                                if (timeToInterlock.ContainsKey(key1))
+                                {
+                                    if (((string)timeToInterlock[key]).Split(CSEPARATOR)[0] ==
+                                        ((string)timeToInterlock[key1]).Split(CSEPARATOR)[0])
+                                    {
+                                        r = ((string)timeToInterlock[key1]).Split(CSEPARATOR)[1];
+                                        if (isConflict(key1, r))
+                                        {
+                                            lockRoute(r);
+                                            timeToInterlock.Remove(key1);
+                                            sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID + "|" +
+                                                Train_ID + "|" + STOPSTATION + "|" + "2" + "|" + "7" + "|" + "1"));
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("进路冲突");
+                                        }
+                                    }
+                                }
+                                timeToInterlock.Remove(key);
+                            }
+                            else
+                            {
+                                MessageBox.Show("进路冲突");
+                            }
+                        }
+                        break;
+                    case UP_ARRIVE_BLOCK:
+                        key = Train_ID + STOPSTATION + ARRIVE + UP_DIRECTION;
+                        key1 = Train_ID + STOPSTATION + DEPARTURE + UP_DIRECTION;
+                        if (timeToInterlock.ContainsKey(key))
+                        {
+                            r = ((string)timeToInterlock[key]).Split(CSEPARATOR)[1];
+                            if (isConflict(key, r))
+                            {
+                                lockRoute(r);
+                                sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" +
+                                    Train_ID + "|" + Train_ID + "|" + STOPSTATION + "|" + "1" + "|" + "7" + "|" + "1"));
+                                if (timeToInterlock.ContainsKey(key1))
+                                {
+                                    if (((string)timeToInterlock[key]).Split(CSEPARATOR)[0] ==
+                                        ((string)timeToInterlock[key1]).Split(CSEPARATOR)[0])
+                                    {
+                                        r = ((string)timeToInterlock[key1]).Split(CSEPARATOR)[1];
+                                        if (isConflict(key1, r))
+                                        {
+                                            lockRoute(r);
+                                            timeToInterlock.Remove(key1);
+                                            sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
+                                                "|" + Train_ID + "|" + STOPSTATION + "|" + "2" + "|" + "7" + "|" + "1"));
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("进路冲突");
+                                        }
+                                    }
+                                }
+                                timeToInterlock.Remove(key);
+                            }
+                            else
+                            {
+                                MessageBox.Show("进路冲突");
+                            }
+                        }
+                        break;
+                }
+                Train_position = "QujianTrack_" + Train_Position;
+                updateTrainPosition(Train_ID, Train_position, Train_Direction);
+                if (((Train)trains[Train_ID]).Train_Location != null)
+                {
+                    if (!((Train)trains[Train_ID]).Train_Location.Contains("QujianTrack_"))
+                    {
+                        clearRoute((string)trainToInterlock[Train_ID + STOPSTATION + DEPARTURE + Dir]);
+                        trainToInterlock.Remove(Train_ID + STOPSTATION + DEPARTURE + Dir);
+                    }
+                }
+                ((Train)trains[Train_ID]).Train_Location = Train_position;
+            }
+        }
+        private void updateTrainPosition(string Train_ID, string Train_Position, string Train_Direction)
+        {
+            Train train = null;
+            string last_positon = "";
+            if (!trainToTrack.ContainsKey(Train_ID))
+            {
+                train = new ConLib.Train();
+                trainToTrack.Add(Train_ID, Train_Position);
+                train.Name = Train_ID;
+                train.车次号 = Train_ID;
+                if (Convert.ToInt32(Train_Direction) == 1)  //指定列车方向
+                {
+                    train.Fangxiang = ConLib.Train.FangXiang.XiaXing;
+                }
+                else
+                {
+                    train.Fangxiang = ConLib.Train.FangXiang.ShangXing;
+                }
+                train.BackColor = System.Drawing.SystemColors.Desktop;      //初始化列车各项参数
+                train.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+                train.Size = new System.Drawing.Size(70, 20);
+                train.TabIndex = 42;
+                train.Train_State = ConLib.Train.Train_state.late;
+                train.晚点时间 = "";
+                this.Controls.Add(train);
+                train.Zlocation = ConLib.Train.Weizhi.置顶;
+                train.Visible = true;
+                trains.Add(Train_ID, train);
+            }
+            else
+            {
+                if ((string)trainToTrack[Train_ID] != Train_Position)
+                {
+                    last_positon = (string)trainToTrack[Train_ID];
+                    if (last_positon.Contains(DOWNINTEVAL_1 + "_") || last_positon.Contains(UPINTEVAL_1 + "_") ||
+                        last_positon.Contains(DOWNINTEVAL_2 + "_") || last_positon.Contains(UPINTEVAL_2 + "_"))
+                    {
+                        ((SingleTrack_WithIJ)intervalTracks[last_positon]).flag_zt = 3;
+                        ((SingleTrack_WithIJ)intervalTracks[last_positon]).Drawpic();
+                        ((CodeOrder)codeOrders[last_positon]).Visible = true;
+                    }
+                    else if (last_positon.Contains("Switch_2"))
+                    {
+                        if (((Switch_2)switches[last_positon]).定反位 == ConLib.Switch_2.DingFan.定位)
+                        {
+                            if (((Switch_2)switches[last_positon]).锁闭状态上 == ConLib.Switch_2.STATE.占用)
+                            {
+                                ((Switch_2)switches[last_positon]).锁闭状态上 = ConLib.Switch_2.STATE.锁闭;
+                            }
+                            else if (((Switch_2)switches[last_positon]).锁闭状态下 == ConLib.Switch_2.STATE.占用)
+                            {
+                                ((Switch_2)switches[last_positon]).锁闭状态下 = ConLib.Switch_2.STATE.锁闭;
+                            }
+                        }
+                        else if (((Switch_2)switches[last_positon]).定反位 == ConLib.Switch_2.DingFan.反位)
+                        {
+                            ((Switch_2)switches[last_positon]).反位锁闭状态 = ConLib.Switch_2.STATE.锁闭;
+                        }
+                    }
+                    else if (last_positon.Contains("Switch_3"))
+                    {
+                        ((Switch_3)switches[last_positon]).锁闭状态 = Switch_3.STATE.锁闭;
+                    }
+                    else if (last_positon.Contains("StationTrack"))
+                    {
+                        ((SingleTrack_WithIJ)stationTracks[last_positon]).flag_zt = 2;
+                        ((SingleTrack_WithIJ)stationTracks[last_positon]).Drawpic();
+                    }
+                    else
+                    {
+                        ((SingleTrack_WithIJ)singleTracks[last_positon]).flag_zt = 2;
+                        ((SingleTrack_WithIJ)singleTracks[last_positon]).Drawpic();
+                    }
+                    trainToTrack.Remove(Train_ID);
+                    trainToTrack.Add(Train_ID, Train_Position);
+                }
+            }
+            if (Train_Position.Contains(DOWNINTEVAL_1 + "_") || Train_Position.Contains(UPINTEVAL_1 + "_") ||
+                Train_Position.Contains(DOWNINTEVAL_2 + "_") || Train_Position.Contains(UPINTEVAL_2 + "_"))
+            {
+                ((SingleTrack_WithIJ)intervalTracks[Train_Position]).flag_zt = 1;
+                ((SingleTrack_WithIJ)intervalTracks[Train_Position]).Drawpic();
+                ((Train)trains[Train_ID]).Location =
+                    new System.Drawing.Point(Convert.ToInt32(((SingleTrack_WithIJ)intervalTracks[Train_Position]).Location.X) - 10,
+                    Convert.ToInt32(((SingleTrack_WithIJ)intervalTracks[Train_Position]).Location.Y) - 23);
+                ((CodeOrder)codeOrders[Train_Position]).Visible = false;
+                ((Train)trains[Train_ID]).Visible = true;
+                int num;
+                string c;
+                num = Convert.ToInt32(Train_Position.Split('_')[2]);
+                for (int i = num - 1; i > 0; i--)           //码序颜色的改变
+                {
+                    c = "QujianTrack_" + Train_Position.Split('_')[1] + "_" + Convert.ToString(i);
+                    if (((SingleTrack_WithIJ)intervalTracks[c]).flag_zt == 3)
+                    {
+                        switch (num - i)
+                        {
+                            case 1:
+                                ((CodeOrder)codeOrders[c]).显示状态 = CodeOrder.CodeView.红黄;
+                                break;
+                            case 2:
+                                ((CodeOrder)codeOrders[c]).显示状态 = CodeOrder.CodeView.黄;
+                                break;
+                            case 3:
+                                ((CodeOrder)codeOrders[c]).显示状态 = CodeOrder.CodeView.黄绿;
+                                break;
+                            default:
+                                ((CodeOrder)codeOrders[c]).显示状态 = CodeOrder.CodeView.绿;
+                                break;
+                        }
+                    }
+                    else
+                        break;
+                }
+            }
+            else if (Train_Position.Contains("Switch_2"))
+            {
+                ((Train)trains[Train_ID]).Visible = false;
+                if (((Switch_2)switches[Train_Position]).定反位 == ConLib.Switch_2.DingFan.定位)
+                {
+                    if (((Switch_2)switches[Train_Position]).锁闭状态上 == ConLib.Switch_2.STATE.锁闭 &&
+                        ((Train)trains[Train_ID]).Fangxiang == ConLib.Train.FangXiang.ShangXing)
+                    {
+                        ((Switch_2)switches[Train_Position]).锁闭状态上 = ConLib.Switch_2.STATE.占用;
+                    }
+                    else if (((Switch_2)switches[Train_Position]).锁闭状态下 == ConLib.Switch_2.STATE.锁闭 &&
+                        ((Train)trains[Train_ID]).Fangxiang == ConLib.Train.FangXiang.XiaXing)
+                    {
+                        ((Switch_2)switches[Train_Position]).锁闭状态下 = ConLib.Switch_2.STATE.占用;
+                    }
+                }
+                else if (((Switch_2)switches[Train_Position]).定反位 == ConLib.Switch_2.DingFan.反位)
+                {
+                    ((Switch_2)switches[Train_Position]).反位锁闭状态 = ConLib.Switch_2.STATE.占用;
+                }
+                if (last_positon.Contains(DOWNINTEVAL_1 + "_") || last_positon.Contains(UPINTEVAL_1 + "_") ||
+                    last_positon.Contains(DOWNINTEVAL_2 + "_") || last_positon.Contains(UPINTEVAL_2 + "_"))
+                {
+                    int num;
+                    string c;
+                    num = Convert.ToInt32(last_positon.Split('_')[2]) + 1;
+                    for (int i = num - 1; i > 0; i--)           //码序颜色的改变
+                    {
+                        c = "QujianTrack_" + last_positon.Split('_')[1] + "_" + Convert.ToString(i);
+                        if (((SingleTrack_WithIJ)intervalTracks[c]).flag_zt == 3)
+                        {
+                            switch (num - i)
+                            {
+                                case 1:
+                                    ((CodeOrder)codeOrders[c]).显示状态 = CodeOrder.CodeView.红黄;
+                                    break;
+                                case 2:
+                                    ((CodeOrder)codeOrders[c]).显示状态 = CodeOrder.CodeView.黄;
+                                    break;
+                                case 3:
+                                    ((CodeOrder)codeOrders[c]).显示状态 = CodeOrder.CodeView.黄绿;
+                                    break;
+                                default:
+                                    ((CodeOrder)codeOrders[c]).显示状态 = CodeOrder.CodeView.绿;
+                                    break;
+                            }
+                        }
+                        else
+                            break;
+                    }
+                }
+            }
+            else if (Train_Position.Contains("Switch_3"))
+            {
+                ((Train)trains[Train_ID]).Visible = false;
+                ((Switch_3)switches[Train_Position]).锁闭状态 = Switch_3.STATE.占用;
+                if (last_positon.Contains(DOWNINTEVAL_1 + "_") || last_positon.Contains(UPINTEVAL_1 + "_") ||
+                    last_positon.Contains(DOWNINTEVAL_2 + "_") || last_positon.Contains(UPINTEVAL_2 + "_"))
+                {
+                    int num;
+                    string c;
+                    num = Convert.ToInt32(last_positon.Split('_')[2]) + 1;
+                    for (int i = num - 1; i > 0; i--)           //码序颜色的改变
+                    {
+                        c = "QujianTrack_" + last_positon.Split('_')[1] + "_" + Convert.ToString(i);
+                        if (((SingleTrack_WithIJ)intervalTracks[c]).flag_zt == 3)
+                        {
+                            switch (num - i)
+                            {
+                                case 1:
+                                    ((CodeOrder)codeOrders[c]).显示状态 = CodeOrder.CodeView.红黄;
+                                    break;
+                                case 2:
+                                    ((CodeOrder)codeOrders[c]).显示状态 = CodeOrder.CodeView.黄;
+                                    break;
+                                case 3:
+                                    ((CodeOrder)codeOrders[c]).显示状态 = CodeOrder.CodeView.黄绿;
+                                    break;
+                                default:
+                                    ((CodeOrder)codeOrders[c]).显示状态 = CodeOrder.CodeView.绿;
+                                    break;
+                            }
+                        }
+                        else
+                            break;
+                    }
+                }
+            }
+            else if (Train_Position.Contains("StationTrack"))
+            {
+                ((Train)trains[Train_ID]).Visible = true;
+                ((SingleTrack_WithIJ)stationTracks[Train_Position]).flag_zt = 1;
+                ((SingleTrack_WithIJ)stationTracks[Train_Position]).Drawpic();
+                ((Train)trains[Train_ID]).Location = new System.Drawing.Point
+                    (Convert.ToInt32(((SingleTrack_WithIJ)stationTracks[Train_Position]).Location.X),
+                    Convert.ToInt32(((SingleTrack_WithIJ)stationTracks[Train_Position]).Location.Y) - 5);
+            }
+            else
+            {
+                ((Train)trains[Train_ID]).Visible = true;
+                ((SingleTrack_WithIJ)singleTracks[Train_Position]).flag_zt = 1;
+                ((SingleTrack_WithIJ)singleTracks[Train_Position]).Drawpic();
+                if (Train_Position.Split('_')[1].Contains("XJC") || Train_Position.Split('_')[1].Contains("SJC"))
+                {
+                    string s = Train_Position.Replace("SingleTrack", "Signal");
+                    ((Signal)signals[s]).信号灯状态 = 5;
+                }
+                ((Train)trains[Train_ID]).Location =
+                    new System.Drawing.Point(Convert.ToInt32(((SingleTrack_WithIJ)singleTracks[Train_Position]).Location.X),
+                    Convert.ToInt32(((SingleTrack_WithIJ)singleTracks[Train_Position]).Location.Y) - 22);
+                if (last_positon.Contains(DOWNINTEVAL_1 + "_") || last_positon.Contains(UPINTEVAL_1 + "_") ||
+                    last_positon.Contains(DOWNINTEVAL_2 + "_") || last_positon.Contains(UPINTEVAL_2 + "_"))
+                {
+                    int num;
+                    string c;
+                    num = Convert.ToInt32(last_positon.Split('_')[2]) + 1;
+                    for (int i = num - 1; i > 0; i--)           //码序颜色的改变
+                    {
+                        c = "QujianTrack_" + last_positon.Split('_')[1] + "_" + Convert.ToString(i);
+                        if (((SingleTrack_WithIJ)intervalTracks[c]).flag_zt == 3)
+                        {
+                            switch (num - i)
+                            {
+                                case 1:
+                                    ((CodeOrder)codeOrders[c]).显示状态 = CodeOrder.CodeView.红黄;
+                                    break;
+                                case 2:
+                                    ((CodeOrder)codeOrders[c]).显示状态 = CodeOrder.CodeView.黄;
+                                    break;
+                                case 3:
+                                    ((CodeOrder)codeOrders[c]).显示状态 = CodeOrder.CodeView.黄绿;
+                                    break;
+                                default:
+                                    ((CodeOrder)codeOrders[c]).显示状态 = CodeOrder.CodeView.绿;
+                                    break;
+                            }
+                        }
+                        else
+                            break;
+                    }
+                }
+            }
+        }
+        private void handlePlan(string message)
+        {
+            string[] temp = new string[4];
+            string arriveRoute = "";
+            string departureRoute = "";
+            string arriveTime;
+            string departureTime;
+            string key = message.Split('|')[1];
+            string dir = message.Split('|')[3];
+            string direction;
+
+            if (dir == "1")
+            {
+                dir = DOWN_DIRECTION;
+                direction = DOWNDIRECTION;
+            }
+            else
+            {
+                dir = UP_DIRECTION;
+                direction = UPDIRECTION;
+            }
+
+            temp[0] = message.Split('|')[6];
+            temp[1] = message.Split('|')[5];
+            temp[2] = message.Split('|')[4];
+            temp[3] = "";
+            if (dir == DOWN_DIRECTION)
+            {
+                arriveRoute = "StationTrack_G" + temp[0] + "&SingleTrack_XJC";
+                departureRoute = "StationTrack_G" + temp[0] + "&SingleTrack_XFC";
+            }
+            else
+            {
+                arriveRoute = "StationTrack_G" + temp[0] + "&SingleTrack_SJC";
+                departureRoute = "StationTrack_G" + temp[0] + "&SingleTrack_SFC";
+            }
+            arriveTime = temp[1];
+            departureTime = temp[2];
+            if (arriveTime != "")
+            {
+                if (DateTime.Compare(DateTime.Now, Convert.ToDateTime(arriveTime)) < 0)
+                {
+                    if (timeToInterlock.ContainsKey(key + STOPSTATION + ARRIVE + dir) &&
+                        trainToInterlock.ContainsKey(key + STOPSTATION + ARRIVE + dir))
+                    {
+                        timeToInterlock.Remove(key + STOPSTATION + ARRIVE + dir);
+                        trainToInterlock.Remove(key + STOPSTATION + ARRIVE + dir);
+                        if (dir == DOWN_DIRECTION)
+                        {
+                            timeToInterlock.Add(key + STOPSTATION + ARRIVE + dir,
+                                arriveTime + SEPARATOR + arriveRoute + SEPARATOR + "QujianTrack_" + DOWN_ARRIVE_BLOCK);
+                        }
+                        else
+                        {
+                            timeToInterlock.Add(key + STOPSTATION + ARRIVE + dir,
+                                arriveTime + SEPARATOR + arriveRoute + SEPARATOR + "QujianTrack_" + UP_ARRIVE_BLOCK);
+                        }
+                        trainToInterlock.Add(key + STOPSTATION + ARRIVE + dir, arriveRoute);
+
+                        trainScheduleInfo.Remove(key + STOPSTATION + ARRIVE + dir);
+                        trainScheduleInfo.Add(key + STOPSTATION + ARRIVE + dir, arriveTime + SEPARATOR + arriveRoute);
+                    }
+                    else if (!timeToInterlock.ContainsKey(key + STOPSTATION + ARRIVE + dir) &&
+                        trainToInterlock.ContainsKey(key + STOPSTATION + ARRIVE + dir))
+                    {
+                        clearRoute((string)trainToInterlock[key + STOPSTATION + ARRIVE + dir]);
+                        trainToInterlock.Remove(key + STOPSTATION + ARRIVE + dir);
+                        if (dir == DOWN_DIRECTION)
+                        {
+                            timeToInterlock.Add(key + STOPSTATION + ARRIVE + dir,
+                                arriveTime + SEPARATOR + arriveRoute + SEPARATOR + "QujianTrack_" + DOWN_ARRIVE_BLOCK);
+                        }
+                        else
+                        {
+                            timeToInterlock.Add(key + STOPSTATION + ARRIVE + dir,
+                                arriveTime + SEPARATOR + arriveRoute + SEPARATOR + "QujianTrack_" + UP_ARRIVE_BLOCK);
+                        }
+                        trainToInterlock.Add(key + STOPSTATION + ARRIVE + dir, arriveRoute);
+
+                        trainScheduleInfo.Remove(key + STOPSTATION + ARRIVE + dir);
+                        trainScheduleInfo.Add(key + STOPSTATION + ARRIVE + dir, arriveTime + SEPARATOR + arriveRoute);
+                    }
+                    else if (!timeToInterlock.ContainsKey(key + STOPSTATION + ARRIVE + dir) &&
+                        !trainToInterlock.ContainsKey(key + STOPSTATION + ARRIVE + dir))
+                    {
+                        if (dir == DOWN_DIRECTION)
+                        {
+                            timeToInterlock.Add(key + STOPSTATION + ARRIVE + dir,
+                                arriveTime + SEPARATOR + arriveRoute + SEPARATOR + "QujianTrack_" + DOWN_ARRIVE_BLOCK);
+                        }
+                        else
+                        {
+                            timeToInterlock.Add(key + STOPSTATION + ARRIVE + dir,
+                                arriveTime + SEPARATOR + arriveRoute + SEPARATOR + "QujianTrack_" + UP_ARRIVE_BLOCK);
+                        }
+                        trainToInterlock.Add(key + STOPSTATION + ARRIVE + dir, arriveRoute);
+
+                        trainScheduleInfo.Add(key + STOPSTATION + ARRIVE + dir, arriveTime + SEPARATOR + arriveRoute);
+                    }
+
+                    for (int j = 0; j < dataGridView1.Rows.Count - 1; j++)
+                    {
+                        if ((string)dataGridView1.Rows[j].Cells[1].Value == key &&
+                            (string)dataGridView1.Rows[j].Cells[5].Value == "接")
+                        {
+                            dataGridView1.Rows.Remove(dataGridView1.Rows[j]);
+                            break;
+                        }
+                    }
+                    dataGridView1.Rows.Add(dataGridId, key,
+                        arriveTime, "邻站", temp[0], "接", arriveRoute, "自动", direction, "等候中...", "无");
+
+                }
+            }
+            if (departureTime != "")
+            {
+                if (DateTime.Compare(DateTime.Now, Convert.ToDateTime(departureTime)) < 0)
+                {
+                    if (timeToInterlock.ContainsKey(key + STOPSTATION + DEPARTURE + dir) &&
+                        trainToInterlock.ContainsKey(key + STOPSTATION + DEPARTURE + dir))
+                    {
+                        timeToInterlock.Remove(key + STOPSTATION + DEPARTURE + dir);
+                        trainToInterlock.Remove(key + STOPSTATION + DEPARTURE + dir);
+                        timeToInterlock.Add(key + STOPSTATION + DEPARTURE + dir,
+                            departureTime + SEPARATOR + departureRoute + SEPARATOR + departureRoute.Split('&')[0]);
+                        trainToInterlock.Add(key + STOPSTATION + DEPARTURE + dir, departureRoute);
+
+                        trainScheduleInfo.Remove(key + STOPSTATION + DEPARTURE + dir);
+                        trainScheduleInfo.Add(key + STOPSTATION + DEPARTURE + dir, arriveTime + SEPARATOR + arriveRoute);
+                    }
+                    else if (!timeToInterlock.ContainsKey(key + STOPSTATION + DEPARTURE + dir) &&
+                        trainToInterlock.ContainsKey(key + STOPSTATION + DEPARTURE + dir))
+                    {
+                        clearRoute((string)trainToInterlock[key + STOPSTATION + DEPARTURE + dir]);
+                        trainToInterlock.Remove(key + STOPSTATION + DEPARTURE + dir);
+                        timeToInterlock.Add(key + STOPSTATION + DEPARTURE + dir,
+                            departureTime + SEPARATOR + departureRoute + SEPARATOR + departureRoute.Split('&')[0]);
+                        trainToInterlock.Add(key + STOPSTATION + DEPARTURE + dir, departureRoute);
+
+                        trainScheduleInfo.Remove(key + STOPSTATION + DEPARTURE + dir);
+                        trainScheduleInfo.Add(key + STOPSTATION + DEPARTURE + dir, arriveTime + SEPARATOR + arriveRoute);
+                    }
+                    else if (!timeToInterlock.ContainsKey(key + STOPSTATION + DEPARTURE + dir) &&
+                        !trainToInterlock.ContainsKey(key + STOPSTATION + DEPARTURE + dir))
+                    {
+                        timeToInterlock.Add(key + STOPSTATION + DEPARTURE + dir,
+                            departureTime + SEPARATOR + departureRoute + SEPARATOR + departureRoute.Split('&')[0]);
+                        trainToInterlock.Add(key + STOPSTATION + DEPARTURE + dir, departureRoute);
+
+                        trainScheduleInfo.Add(key + STOPSTATION + DEPARTURE + dir, arriveTime + SEPARATOR + arriveRoute);
+                    }
+
+                    for (int j = 0; j < dataGridView1.Rows.Count - 1; j++)
+                    {
+                        if ((string)dataGridView1.Rows[j].Cells[1].Value == key &&
+                            (string)dataGridView1.Rows[j].Cells[5].Value == "发")
+                        {
+                            dataGridView1.Rows.Remove(dataGridView1.Rows[j]);
+                            break;
+                        }
+                    }
+                    dataGridView1.Rows.Add(dataGridId, key, departureTime,
+                        Convert.ToDateTime(departureTime).AddMinutes(-5).ToShortTimeString(),
+                        temp[0], "发", departureRoute, "自动", direction, "等候中...", "无");
+
+                }
+            }
+        }
+        private void handledelete(string message)
+        {
+            if (trainToTrack.Contains(message.Split('|')[1]))
+            {
+                Train train = new ConLib.Train();
+                upDownState.Remove(message.Split('|')[1]);
+                ((SingleTrack_WithIJ)intervalTracks[trainToTrack[message.Split('|')[1]]]).flag_zt = 3;
+                ((SingleTrack_WithIJ)intervalTracks[trainToTrack[message.Split('|')[1]]]).Drawpic();
+                string last_positon = (string)trainToTrack[message.Split('|')[1]];
+                if (last_positon.Contains(DOWNINTEVAL_1 + "_") || last_positon.Contains(UPINTEVAL_1 + "_")
+                    || last_positon.Contains(DOWNINTEVAL_2 + "_") || last_positon.Contains(UPINTEVAL_2 + "_"))
+                {
+                    int num;
+                    string c;
+                    num = Convert.ToInt32(last_positon.Split('_')[2]) + 1;
+                    c = "QujianTrack_" + last_positon.Split('_')[1] + "_" + Convert.ToString(num - 1);
+                    ((CodeOrder)codeOrders[c]).Visible = true;
+                    for (int i = num - 1; i > 0; i--)           //码序颜色的改变
+                    {
+                        c = "QujianTrack_" + last_positon.Split('_')[1] + "_" + Convert.ToString(i);
+                        if (((SingleTrack_WithIJ)intervalTracks[c]).flag_zt == 3)
+                        {
+                            switch (num - i)
+                            {
+                                case 1:
+                                    ((CodeOrder)codeOrders[c]).显示状态 = CodeOrder.CodeView.红黄;
+                                    break;
+                                case 2:
+                                    ((CodeOrder)codeOrders[c]).显示状态 = CodeOrder.CodeView.黄;
+                                    break;
+                                case 3:
+                                    ((CodeOrder)codeOrders[c]).显示状态 = CodeOrder.CodeView.黄绿;
+                                    break;
+                                default:
+                                    ((CodeOrder)codeOrders[c]).显示状态 = CodeOrder.CodeView.绿;
+                                    break;
+                            }
+                        }
+                        else
+                            break;
+                    }
+                }
+                trainToTrack.Remove(message.Split('|')[1]);
+                train = (Train)trains[message.Split('|')[1]];
+                trains.Remove(message.Split('|')[1]);
+                this.Controls.Remove(train);
+                List<string> l = new List<string>();
+                foreach (string key in trainScheduleInfo.Keys)
+                {
+                    if (key.Contains(message.Split('|')[1]))
+                    {
+                        l.Add(key);
+                    }
+                }
+                foreach (string key in l)
+                {
+                    trainScheduleInfo.Remove(key);
+                }
+                for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
+                {
+                    if ((string)dataGridView1.Rows[i].Cells[1].Value == message.Split('|')[1])
+                    {
+                        dataGridView1.Rows.Remove(dataGridView1.Rows[i]);
+                        break;
+                    }
+                }
+            }
+        }
+        private void handleTime(string message)
+        {
+            DateTime t = DateTime.Parse(message.Split('|')[1]);
+            TimeUtil.SYSTEMTIME st = new TimeUtil.SYSTEMTIME();
+            st.FromDateTime(t);
+            TimeUtil.Win32API.SetLocalTime(ref st);
+        }
+        private void handleAccident(string message)
+        {
+            lockRoute(message.Split('|')[1]);
+            string s = "";
+            string s3 = "";
+            if (message.Split('|')[2].Substring(message.Split('|')[2].Length - 1, 1) == "1")
+            {
+                s = DOWN_DIRECTION;
+                s3 = "X";
+            }
+            else
+            {
+                s = UP_DIRECTION;
+                s3 = "S";
+            }
+            string s1 = message.Split('|')[2].Substring(0, message.Split('|')[2].Length - 1) + s;
+            if (!trainToInterlock.ContainsKey(s1))
+            {
+                trainToInterlock.Add(s1, message.Split('|')[1]);
+            }
+            if (timeToInterlock.ContainsKey(s1))
+            {
+                timeToInterlock.Remove(s1);
+            }
+            if (!trainScheduleInfo.ContainsKey(s1))
+            {
+                trainScheduleInfo.Add(s1, message.Split('|')[5] + SEPARATOR + message.Split('|')[1]);
+            }
+            if (!upDownState.ContainsKey(message.Split('|')[3]))
+            {
+                upDownState.Add(message.Split('|')[3], message.Split('|')[4]);
+            }
+            string s2 = "Xinhaoji_";
+            if (message.Split('|')[4] == DEPARTURE)
+            {
+                s2 = s2 + message.Split('|')[1].Split('&')[0].Split('_')[1] + "_" + s3;
+            }
+            else
+            {
+                s2 = s2 + message.Split('|')[1].Split('&')[1].Split('_')[1];
+            }
+                ((Signal)signals[s2]).信号灯状态 = 5;
+        }
+        private void currentTime_Tick(object sender, EventArgs e)
+        {
+            DateTime Time;
+            string[] Deletestring = new string[10];
+            int i = 0;
+            string r;
+            string loc;
+            foreach (string key in timeToInterlock.Keys)
+            {
+                Time = Convert.ToDateTime(((string)timeToInterlock[key]).Split(CSEPARATOR)[0]);
+                r = ((string)timeToInterlock[key]).Split(CSEPARATOR)[1];
+                loc = ((string)timeToInterlock[key]).Split(CSEPARATOR)[2];
+                if (loc != "NO")
+                {
+                    if (DateTime.Compare(DateTime.Now.AddSeconds(10), Time) > 0 &&
+                        (string)trainToTrack[key.Substring(0, 5)] == loc && key.Contains(DEPARTURE))
+                    {
+                        if (isConflict(key, r))
+                        {
+                            lockRoute(r);
+                            Deletestring[i] = key;
+                            i++;
+                            sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + key.Substring(0, 5) + "|" +
+                                key.Substring(0, 5) + "|" + key.Substring(5, 2) + "|" + "0" + "|" + "7" + "|" + "1"));
+                        }
+                        else
+                        {
+                            MessageBox.Show("进路冲突");
+                        }
+                    }
+                }
+                else
+                {
+                    if (DateTime.Compare(DateTime.Now.AddSeconds(10), Time) > 0)
+                    {
+                        if (isConflict(key, r))
+                        {
+                            lockRoute(r);
+                            Deletestring[i] = key;
+                            i++;
+                        }
+                        else
+                        {
+                            MessageBox.Show("进路冲突");
+                        }
+                    }
+                }
+            }
+            for (int j = 0; j < Deletestring.Length; j++)
+            {
+                if (Deletestring[j] != null)
+                {
+                    timeToInterlock.Remove(Deletestring[j]);
+                }
+            }
+
+        }
+        public void sendMessage(object obj)
+        {
+            EndPoint point = new IPEndPoint(IPAddress.Parse("192.168.1.7"), 178);
+            string message = (string)obj;
+            server.SendTo(Encoding.UTF8.GetBytes(message), point);
+        }
+        public void sendMessageToCTC(object obj)
+        {
+            EndPoint point = new IPEndPoint(IPAddress.Parse(CTCIP), CTCPORT);
+            string message = (string)obj;
+            server.SendTo(Encoding.UTF8.GetBytes(message), point);
+        }
+        public void sendMessageToRBC(object obj)
+        {
+            EndPoint point = new IPEndPoint(IPAddress.Parse(RBCIP), RBCPORT);
+            string message = (string)obj;
+            server.SendTo(Encoding.UTF8.GetBytes(message), point);
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            lockRoute(textBox1.Text);
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            clearRoute(textBox2.Text);
+        }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            sendMessage(textBox3.Text);
+        }
+    }
+}

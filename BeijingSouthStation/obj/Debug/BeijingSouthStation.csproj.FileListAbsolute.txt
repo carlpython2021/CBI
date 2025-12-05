@@ -1,0 +1,248 @@
+D:\BeijingSouthStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+D:\BeijingSouthStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+D:\BeijingSouthStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+D:\BeijingSouthStation\BeijingSouthStation\bin\Debug\ConLib.dll
+D:\BeijingSouthStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+D:\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csprojResolveAssemblyReference.cache
+D:\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Form1.resources
+D:\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+D:\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.GenerateResource.Cache
+D:\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+D:\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+F:\平台\BeijingSouthStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+F:\平台\BeijingSouthStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+F:\平台\BeijingSouthStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+F:\平台\BeijingSouthStation\BeijingSouthStation\bin\Debug\ConLib.dll
+F:\平台\BeijingSouthStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+F:\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Form1.resources
+F:\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+F:\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.GenerateResource.cache
+F:\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+F:\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+F:\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.ResolveComReference.cache
+F:\平台\BeijingSouthStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+F:\平台\BeijingSouthStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+F:\邓子星的文档\平台\BeijingSouthStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+F:\邓子星的文档\平台\BeijingSouthStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+F:\邓子星的文档\平台\BeijingSouthStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+F:\邓子星的文档\平台\BeijingSouthStation\BeijingSouthStation\bin\Debug\ConLib.dll
+F:\邓子星的文档\平台\BeijingSouthStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+F:\邓子星的文档\平台\BeijingSouthStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+F:\邓子星的文档\平台\BeijingSouthStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+F:\邓子星的文档\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csprojAssemblyReference.cache
+F:\邓子星的文档\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.ResolveComReference.cache
+F:\邓子星的文档\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Form1.resources
+F:\邓子星的文档\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+F:\邓子星的文档\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.GenerateResource.cache
+F:\邓子星的文档\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.CoreCompileInputs.cache
+F:\邓子星的文档\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.CopyComplete
+F:\邓子星的文档\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+F:\邓子星的文档\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+E:\平台开发-08\平台\BeijingSouthStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+E:\平台开发-08\平台\BeijingSouthStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+E:\平台开发-08\平台\BeijingSouthStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+E:\平台开发-08\平台\BeijingSouthStation\BeijingSouthStation\bin\Debug\ConLib.dll
+E:\平台开发-08\平台\BeijingSouthStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+E:\平台开发-08\平台\BeijingSouthStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+E:\平台开发-08\平台\BeijingSouthStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+E:\平台开发-08\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csprojResolveAssemblyReference.cache
+E:\平台开发-08\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.ResolveComReference.cache
+E:\平台开发-08\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Form1.resources
+E:\平台开发-08\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+E:\平台开发-08\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.GenerateResource.Cache
+E:\平台开发-08\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+E:\平台开发-08\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+C:\Users\lenovo\Desktop\平台\BeijingSouthStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+C:\Users\lenovo\Desktop\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.ResolveComReference.cache
+C:\Users\lenovo\Desktop\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+C:\Users\lenovo\Desktop\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+F:\平台\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csprojResolveAssemblyReference.cache
+C:\Users\lenovo\Desktop\BeijingSouthStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+C:\Users\lenovo\Desktop\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.ResolveComReference.cache
+C:\Users\lenovo\Desktop\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+C:\Users\lenovo\Desktop\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+C:\Users\lenovo\Desktop\BeijingSouthStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+C:\Users\lenovo\Desktop\BeijingSouthStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+C:\Users\lenovo\Desktop\BeijingSouthStation\BeijingSouthStation\bin\Debug\ConLib.dll
+C:\Users\lenovo\Desktop\BeijingSouthStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+C:\Users\lenovo\Desktop\BeijingSouthStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+C:\Users\lenovo\Desktop\BeijingSouthStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+C:\Users\lenovo\Desktop\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csprojResolveAssemblyReference.cache
+C:\Users\lenovo\Desktop\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Form1.resources
+C:\Users\lenovo\Desktop\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+C:\Users\lenovo\Desktop\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.GenerateResource.Cache
+I:\BeijingSouthStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+I:\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.ResolveComReference.cache
+I:\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+I:\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+I:\BeijingSouthStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+I:\BeijingSouthStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+I:\BeijingSouthStation\BeijingSouthStation\bin\Debug\ConLib.dll
+I:\BeijingSouthStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+I:\BeijingSouthStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+I:\BeijingSouthStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+I:\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Form1.resources
+I:\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+I:\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.GenerateResource.Cache
+I:\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csprojResolveAssemblyReference.cache
+H:\BeijingSouthStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+H:\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.ResolveComReference.cache
+H:\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+H:\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+H:\BeijingSouthStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+H:\BeijingSouthStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+H:\BeijingSouthStation\BeijingSouthStation\bin\Debug\ConLib.dll
+H:\BeijingSouthStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+H:\BeijingSouthStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+H:\BeijingSouthStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+H:\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Form1.resources
+H:\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+H:\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.GenerateResource.Cache
+H:\BeijingSouthStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csprojResolveAssemblyReference.cache
+H:\BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+H:\BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.ResolveComReference.cache
+H:\BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+H:\BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+H:\BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+H:\BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+H:\BeijingStation\BeijingSouthStation\bin\Debug\ConLib.dll
+H:\BeijingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+H:\BeijingStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+H:\BeijingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+H:\BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csprojResolveAssemblyReference.cache
+H:\BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+H:\BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.GenerateResource.Cache
+H:\BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.北京南站.resources
+F:\平台\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+F:\平台\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.ResolveComReference.cache
+F:\平台\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+F:\平台\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+F:\平台\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+F:\平台\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+F:\平台\平台_BeijingStation\BeijingSouthStation\bin\Debug\ConLib.dll
+F:\平台\平台_BeijingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+F:\平台\平台_BeijingStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+F:\平台\平台_BeijingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+F:\平台\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.北京南站.resources
+F:\平台\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+F:\平台\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.GenerateResource.Cache
+F:\平台\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csprojResolveAssemblyReference.cache
+H:\平台\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+H:\平台\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.ResolveComReference.cache
+H:\平台\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+H:\平台\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+H:\平台\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+H:\平台\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+H:\平台\平台_BeijingStation\BeijingSouthStation\bin\Debug\ConLib.dll
+H:\平台\平台_BeijingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+H:\平台\平台_BeijingStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+H:\平台\平台_BeijingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+H:\平台\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csprojResolveAssemblyReference.cache
+H:\平台\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.北京南站.resources
+H:\平台\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+H:\平台\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.GenerateResource.Cache
+I:\平台\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+I:\平台\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.ResolveComReference.cache
+I:\平台\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+I:\平台\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+I:\平台\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+I:\平台\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+I:\平台\平台_BeijingStation\BeijingSouthStation\bin\Debug\ConLib.dll
+I:\平台\平台_BeijingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+I:\平台\平台_BeijingStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+I:\平台\平台_BeijingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+I:\平台\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csprojResolveAssemblyReference.cache
+I:\平台\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.北京南站.resources
+I:\平台\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+I:\平台\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.GenerateResource.Cache
+F:\平台 1.5\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+F:\平台 1.5\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.ResolveComReference.cache
+F:\平台 1.5\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+F:\平台 1.5\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+F:\平台 1.5\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+F:\平台 1.5\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+F:\平台 1.5\平台_BeijingStation\BeijingSouthStation\bin\Debug\ConLib.dll
+F:\平台 1.5\平台_BeijingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+F:\平台 1.5\平台_BeijingStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+F:\平台 1.5\平台_BeijingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+F:\平台 1.5\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.北京南站.resources
+F:\平台 1.5\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+F:\平台 1.5\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.GenerateResource.Cache
+F:\平台 1.5\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csprojResolveAssemblyReference.cache
+F:\平台 1.6\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+F:\平台 1.6\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.ResolveComReference.cache
+F:\平台 1.6\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+F:\平台 1.6\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+F:\平台 1.6\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+F:\平台 1.6\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+F:\平台 1.6\平台_BeijingStation\BeijingSouthStation\bin\Debug\ConLib.dll
+F:\平台 1.6\平台_BeijingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+F:\平台 1.6\平台_BeijingStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+F:\平台 1.6\平台_BeijingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+F:\平台 1.6\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csprojResolveAssemblyReference.cache
+F:\平台 1.6\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.北京南站.resources
+F:\平台 1.6\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+F:\平台 1.6\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.GenerateResource.Cache
+F:\平台 1.7\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+F:\平台 1.7\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.ResolveComReference.cache
+F:\平台 1.7\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+F:\平台 1.7\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+F:\平台 1.7\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+F:\平台 1.7\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+F:\平台 1.7\平台_BeijingStation\BeijingSouthStation\bin\Debug\ConLib.dll
+F:\平台 1.7\平台_BeijingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+F:\平台 1.7\平台_BeijingStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+F:\平台 1.7\平台_BeijingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+F:\平台 1.7\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csprojResolveAssemblyReference.cache
+F:\平台 1.7\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.北京南站.resources
+F:\平台 1.7\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+F:\平台 1.7\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.GenerateResource.Cache
+F:\平台 1.8\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+F:\平台 1.8\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.ResolveComReference.cache
+F:\平台 1.8\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+F:\平台 1.8\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+F:\平台 1.8\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+F:\平台 1.8\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+F:\平台 1.8\平台_BeijingStation\BeijingSouthStation\bin\Debug\ConLib.dll
+F:\平台 1.8\平台_BeijingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+F:\平台 1.8\平台_BeijingStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+F:\平台 1.8\平台_BeijingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+F:\平台 1.8\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csprojResolveAssemblyReference.cache
+F:\平台 1.8\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.北京南站.resources
+F:\平台 1.8\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+F:\平台 1.8\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.GenerateResource.Cache
+F:\平台 1.8\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Form2.resources
+F:\平台 4.14\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+F:\平台 4.14\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.ResolveComReference.cache
+F:\平台 4.14\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+F:\平台 4.14\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+F:\平台 4.14\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+F:\平台 4.14\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+F:\平台 4.14\平台_BeijingStation\BeijingSouthStation\bin\Debug\ConLib.dll
+F:\平台 4.14\平台_BeijingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+F:\平台 4.14\平台_BeijingStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+F:\平台 4.14\平台_BeijingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+F:\平台 4.14\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csprojResolveAssemblyReference.cache
+F:\平台 4.14\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.北京南站.resources
+F:\平台 4.14\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Form2.resources
+F:\平台 4.14\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+F:\平台 4.14\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.GenerateResource.Cache
+F:\平台 9.1\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+F:\平台 9.1\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.ResolveComReference.cache
+F:\平台 9.1\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+F:\平台 9.1\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+F:\平台 9.1\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+F:\平台 9.1\平台_BeijingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+F:\平台 9.1\平台_BeijingStation\BeijingSouthStation\bin\Debug\ConLib.dll
+F:\平台 9.1\平台_BeijingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+F:\平台 9.1\平台_BeijingStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+F:\平台 9.1\平台_BeijingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+F:\平台 9.1\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csprojResolveAssemblyReference.cache
+F:\平台 9.1\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.北京南站.resources
+F:\平台 9.1\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Form2.resources
+F:\平台 9.1\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+F:\平台 9.1\平台_BeijingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.GenerateResource.Cache
+F:\平台 9.1\平台_DeZhouStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+F:\平台 9.1\平台_DeZhouStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.csproj.ResolveComReference.cache
+F:\平台 9.1\平台_DeZhouStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+F:\平台 9.1\平台_DeZhouStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb

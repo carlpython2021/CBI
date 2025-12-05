@@ -1,0 +1,263 @@
+F:\平台 9.1\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csprojResolveAssemblyReference.cache
+F:\平台 9.1\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.ResolveComReference.cache
+F:\平台 9.1\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.南京南站.resources
+F:\平台 9.1\平台_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+F:\平台 9.1\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.GenerateResource.Cache
+F:\平台 9.1\平台_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+F:\平台 9.1\平台_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+F:\平台 9.1\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.Form2.resources
+F:\平台 9.1\平台_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+F:\平台 9.1\平台_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+F:\平台 9.1\平台_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+F:\平台 9.1\平台_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.dll
+F:\平台 9.1\平台_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+F:\平台 9.1\平台_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+F:\平台 9.1\平台_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+C:\Users\lenovo\Desktop\平台 9.1\平台_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+C:\Users\lenovo\Desktop\平台 9.1\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.ResolveComReference.cache
+C:\Users\lenovo\Desktop\平台 9.1\平台_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+C:\Users\lenovo\Desktop\平台 9.1\平台_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+C:\Users\lenovo\Desktop\平台 9.1\平台_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+C:\Users\lenovo\Desktop\平台 9.1\平台_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+C:\Users\lenovo\Desktop\平台 9.1\平台_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.dll
+C:\Users\lenovo\Desktop\平台 9.1\平台_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+C:\Users\lenovo\Desktop\平台 9.1\平台_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+C:\Users\lenovo\Desktop\平台 9.1\平台_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+C:\Users\lenovo\Desktop\平台 9.1\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csprojResolveAssemblyReference.cache
+C:\Users\lenovo\Desktop\平台 9.1\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.南京南站.resources
+C:\Users\lenovo\Desktop\平台 9.1\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.Form2.resources
+C:\Users\lenovo\Desktop\平台 9.1\平台_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+C:\Users\lenovo\Desktop\平台 9.1\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.GenerateResource.Cache
+F:\平台 10.28\平台_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+F:\平台 10.28\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.ResolveComReference.cache
+F:\平台 10.28\平台_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+F:\平台 10.28\平台_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+F:\平台 10.28\平台_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+F:\平台 10.28\平台_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+F:\平台 10.28\平台_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.dll
+F:\平台 10.28\平台_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+F:\平台 10.28\平台_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+F:\平台 10.28\平台_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+F:\平台 10.28\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csprojResolveAssemblyReference.cache
+F:\平台 10.28\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.南京南站.resources
+F:\平台 10.28\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.Form2.resources
+F:\平台 10.28\平台_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+F:\平台 10.28\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.GenerateResource.Cache
+C:\Users\ww\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+C:\Users\ww\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.ResolveComReference.cache
+C:\Users\ww\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+C:\Users\ww\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+C:\Users\ww\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+C:\Users\ww\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+C:\Users\ww\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.dll
+C:\Users\ww\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+C:\Users\ww\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+C:\Users\ww\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+C:\Users\ww\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csprojResolveAssemblyReference.cache
+C:\Users\ww\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.南京南站.resources
+C:\Users\ww\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.Form2.resources
+C:\Users\ww\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+C:\Users\ww\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.GenerateResource.Cache
+C:\Users\lenovo\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+C:\Users\lenovo\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.ResolveComReference.cache
+C:\Users\lenovo\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+C:\Users\lenovo\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+C:\Users\lenovo\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+C:\Users\lenovo\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+C:\Users\lenovo\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.dll
+C:\Users\lenovo\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+C:\Users\lenovo\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+C:\Users\lenovo\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+C:\Users\lenovo\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csprojResolveAssemblyReference.cache
+C:\Users\lenovo\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.南京南站.resources
+C:\Users\lenovo\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.Form2.resources
+C:\Users\lenovo\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+C:\Users\lenovo\Desktop\沙盘调试最终版V6.0\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.GenerateResource.Cache
+C:\Users\lenovo\Desktop\车站CTC_backup\平台_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+C:\Users\lenovo\Desktop\车站CTC_backup\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.ResolveComReference.cache
+C:\Users\lenovo\Desktop\车站CTC_backup\平台_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+C:\Users\lenovo\Desktop\车站CTC_backup\平台_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+C:\Users\lenovo\Desktop\车站CTC_backup\平台_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+C:\Users\lenovo\Desktop\车站CTC_backup\平台_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+C:\Users\lenovo\Desktop\车站CTC_backup\平台_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.dll
+C:\Users\lenovo\Desktop\车站CTC_backup\平台_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+C:\Users\lenovo\Desktop\车站CTC_backup\平台_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+C:\Users\lenovo\Desktop\车站CTC_backup\平台_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+C:\Users\lenovo\Desktop\车站CTC_backup\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csprojResolveAssemblyReference.cache
+C:\Users\lenovo\Desktop\车站CTC_backup\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.南京南站.resources
+C:\Users\lenovo\Desktop\车站CTC_backup\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.Form2.resources
+C:\Users\lenovo\Desktop\车站CTC_backup\平台_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+C:\Users\lenovo\Desktop\车站CTC_backup\平台_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.GenerateResource.Cache
+C:\Users\lenovo\Desktop\huanming\5_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+C:\Users\lenovo\Desktop\huanming\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.ResolveComReference.cache
+C:\Users\lenovo\Desktop\huanming\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+C:\Users\lenovo\Desktop\huanming\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+C:\Users\lenovo\Desktop\huanming\5_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+C:\Users\lenovo\Desktop\huanming\5_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+C:\Users\lenovo\Desktop\huanming\5_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.dll
+C:\Users\lenovo\Desktop\huanming\5_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+C:\Users\lenovo\Desktop\huanming\5_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+C:\Users\lenovo\Desktop\huanming\5_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+C:\Users\lenovo\Desktop\huanming\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csprojResolveAssemblyReference.cache
+C:\Users\lenovo\Desktop\huanming\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.南京南站.resources
+C:\Users\lenovo\Desktop\huanming\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.Form2.resources
+C:\Users\lenovo\Desktop\huanming\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+C:\Users\lenovo\Desktop\huanming\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.GenerateResource.Cache
+C:\Users\lenovo\Desktop\0225车站\huanming\5_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+C:\Users\lenovo\Desktop\0225车站\huanming\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.ResolveComReference.cache
+C:\Users\lenovo\Desktop\0225车站\huanming\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+C:\Users\lenovo\Desktop\0225车站\huanming\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+C:\Users\lenovo\Desktop\0225车站\huanming\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csprojResolveAssemblyReference.cache
+C:\Users\lenovo\Desktop\0225车站\huanming\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.南京南站.resources
+C:\Users\lenovo\Desktop\0225车站\huanming\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.Form2.resources
+C:\Users\lenovo\Desktop\0225车站\huanming\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+C:\Users\lenovo\Desktop\0225车站\huanming\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.GenerateResource.Cache
+C:\Users\lenovo\Desktop\0225车站\huanming\5_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+C:\Users\lenovo\Desktop\0225车站\huanming\5_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+C:\Users\lenovo\Desktop\0225车站\huanming\5_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.dll
+C:\Users\lenovo\Desktop\0225车站\huanming\5_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+C:\Users\lenovo\Desktop\0225车站\huanming\5_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+C:\Users\lenovo\Desktop\0225车站\huanming\5_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+C:\Users\lenovo\Desktop\0226\5_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+C:\Users\lenovo\Desktop\0226\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.ResolveComReference.cache
+C:\Users\lenovo\Desktop\0226\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+C:\Users\lenovo\Desktop\0226\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+C:\Users\lenovo\Desktop\0226\5_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+C:\Users\lenovo\Desktop\0226\5_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+C:\Users\lenovo\Desktop\0226\5_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.dll
+C:\Users\lenovo\Desktop\0226\5_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+C:\Users\lenovo\Desktop\0226\5_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+C:\Users\lenovo\Desktop\0226\5_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+C:\Users\lenovo\Desktop\0226\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csprojResolveAssemblyReference.cache
+C:\Users\lenovo\Desktop\0226\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.南京南站.resources
+C:\Users\lenovo\Desktop\0226\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.Form2.resources
+C:\Users\lenovo\Desktop\0226\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+C:\Users\lenovo\Desktop\0226\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.GenerateResource.Cache
+E:\研究生\博三\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+E:\研究生\博三\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.ResolveComReference.cache
+E:\研究生\博三\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+E:\研究生\博三\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+E:\北交\博士资料\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+E:\北交\博士资料\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.ResolveComReference.cache
+E:\北交\博士资料\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+E:\北交\博士资料\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+E:\北交\博士资料\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+E:\北交\博士资料\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+E:\北交\博士资料\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.dll
+E:\北交\博士资料\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+E:\北交\博士资料\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+E:\北交\博士资料\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+E:\北交\博士资料\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csprojResolveAssemblyReference.cache
+E:\北交\博士资料\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.南京南站.resources
+E:\北交\博士资料\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.Form2.resources
+E:\北交\博士资料\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+E:\北交\博士资料\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.GenerateResource.Cache
+G:\平台\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+G:\平台\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.ResolveComReference.cache
+G:\平台\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+G:\平台\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+C:\Users\wxy\Desktop\平台单多车1123\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+C:\Users\wxy\Desktop\平台单多车1123\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.ResolveComReference.cache
+C:\Users\wxy\Desktop\平台单多车1123\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+C:\Users\wxy\Desktop\平台单多车1123\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+C:\Users\wxy\Desktop\平台单多车1123\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+C:\Users\wxy\Desktop\平台单多车1123\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+C:\Users\wxy\Desktop\平台单多车1123\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.dll
+C:\Users\wxy\Desktop\平台单多车1123\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+C:\Users\wxy\Desktop\平台单多车1123\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+C:\Users\wxy\Desktop\平台单多车1123\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+C:\Users\wxy\Desktop\平台单多车1123\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csprojResolveAssemblyReference.cache
+C:\Users\wxy\Desktop\平台单多车1123\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.南京南站.resources
+C:\Users\wxy\Desktop\平台单多车1123\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.Form2.resources
+C:\Users\wxy\Desktop\平台单多车1123\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+C:\Users\wxy\Desktop\平台单多车1123\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.GenerateResource.Cache
+E:\北交\博士资料\平台文件\平台单多车1126（改联锁表和下行反向接发车）\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+E:\北交\博士资料\平台文件\平台单多车1126（改联锁表和下行反向接发车）\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.ResolveComReference.cache
+E:\北交\博士资料\平台文件\平台单多车1126（改联锁表和下行反向接发车）\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+E:\北交\博士资料\平台文件\平台单多车1126（改联锁表和下行反向接发车）\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+E:\北交\博士资料\平台文件\平台单多车1126（改联锁表和下行反向接发车）\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+E:\北交\博士资料\平台文件\平台单多车1126（改联锁表和下行反向接发车）\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+E:\北交\博士资料\平台文件\平台单多车1126（改联锁表和下行反向接发车）\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.dll
+E:\北交\博士资料\平台文件\平台单多车1126（改联锁表和下行反向接发车）\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+E:\北交\博士资料\平台文件\平台单多车1126（改联锁表和下行反向接发车）\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+E:\北交\博士资料\平台文件\平台单多车1126（改联锁表和下行反向接发车）\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+E:\北交\博士资料\平台文件\平台单多车1126（改联锁表和下行反向接发车）\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csprojResolveAssemblyReference.cache
+E:\北交\博士资料\平台文件\平台单多车1126（改联锁表和下行反向接发车）\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.南京南站.resources
+E:\北交\博士资料\平台文件\平台单多车1126（改联锁表和下行反向接发车）\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.Form2.resources
+E:\北交\博士资料\平台文件\平台单多车1126（改联锁表和下行反向接发车）\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+E:\北交\博士资料\平台文件\平台单多车1126（改联锁表和下行反向接发车）\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.GenerateResource.Cache
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.ResolveComReference.cache
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.dll
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\ConLib.pdb
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\5_NanJingStation\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csprojResolveAssemblyReference.cache
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.南京南站.resources
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.Form2.resources
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\5_NanJingStation\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.GenerateResource.Cache
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.ResolveComReference.cache
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A\BeijingSouthStation\obj\Debug\NanJingNanStation.csprojResolveAssemblyReference.cache
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A\BeijingSouthStation\obj\Debug\NanJingNanStation.南京南站.resources
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A\BeijingSouthStation\obj\Debug\NanJingNanStation.Form2.resources
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.GenerateResource.Cache
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\C\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\C\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.ResolveComReference.cache
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\C\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\C\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\C\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\C\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\C\BeijingSouthStation\bin\Debug\ConLib.dll
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\C\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\C\BeijingSouthStation\bin\Debug\ConLib.pdb
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\C\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\C\BeijingSouthStation\obj\Debug\NanJingNanStation.csprojResolveAssemblyReference.cache
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\C\BeijingSouthStation\obj\Debug\NanJingNanStation.南京南站.resources
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\C\BeijingSouthStation\obj\Debug\NanJingNanStation.Form2.resources
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\C\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\C\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.GenerateResource.Cache
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A\BeijingSouthStation\bin\Debug\ConLib.dll
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A\BeijingSouthStation\bin\Debug\ConLib.pdb
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A - v1.1\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A - v1.1\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.ResolveComReference.cache
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A - v1.1\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A - v1.1\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A - v1.1\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A - v1.1\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A - v1.1\BeijingSouthStation\bin\Debug\ConLib.dll
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A - v1.1\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A - v1.1\BeijingSouthStation\bin\Debug\ConLib.pdb
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A - v1.1\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A - v1.1\BeijingSouthStation\obj\Debug\NanJingNanStation.csprojResolveAssemblyReference.cache
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A - v1.1\BeijingSouthStation\obj\Debug\NanJingNanStation.南京南站.resources
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A - v1.1\BeijingSouthStation\obj\Debug\NanJingNanStation.Form2.resources
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A - v1.1\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+C:\Users\lenovo\Desktop\1129\平台单多车1127（改联锁表-下行反向接发车-加代码）\沙盘最终版\A - v1.1\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.GenerateResource.Cache
+D:\Project\xiangmu\A - v1.2\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+D:\Project\xiangmu\A - v1.2\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.ResolveComReference.cache
+D:\Project\xiangmu\A - v1.2\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+D:\Project\xiangmu\A - v1.2\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+D:\Project\xiangmu\A - v1.2\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+D:\Project\xiangmu\A - v1.2\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+D:\Project\xiangmu\A - v1.2\BeijingSouthStation\bin\Debug\ConLib.dll
+D:\Project\xiangmu\A - v1.2\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+D:\Project\xiangmu\A - v1.2\BeijingSouthStation\bin\Debug\ConLib.pdb
+D:\Project\xiangmu\A - v1.2\BeijingSouthStation\bin\Debug\ExcelDataReader.xml
+D:\Project\xiangmu\A - v1.2\BeijingSouthStation\obj\Debug\NanJingNanStation.csprojResolveAssemblyReference.cache
+D:\Project\xiangmu\A - v1.2\BeijingSouthStation\obj\Debug\NanJingNanStation.南京南站.resources
+D:\Project\xiangmu\A - v1.2\BeijingSouthStation\obj\Debug\NanJingNanStation.Form2.resources
+D:\Project\xiangmu\A - v1.2\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+D:\Project\xiangmu\A - v1.2\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.GenerateResource.Cache

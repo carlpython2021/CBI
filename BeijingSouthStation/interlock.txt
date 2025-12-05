@@ -1,0 +1,67 @@
+﻿//左上接车 下行正向接车 StationTrack_G1&SingleTrack_XJC
+StationTrack_G1&SingleTrack_XJC
+StationTrack_G1#FREE&SingleTrack_L17#FREE&Switch_3_G7_D&Switch_2_G13_D%~
+StationTrack_G3&SingleTrack_XJC
+StationTrack_G3#FREE&SingleTrack_L17#FREE&Switch_3_G7_F&Switch_2_G13_D%~
+StationTrack_G2&SingleTrack_XJC
+StationTrack_G2#FREE&SingleTrack_L17#FREE&SingleTrack_L35#FREE&Switch_3_G5_D&Switch_2_G13_F%~
+StationTrack_G4&SingleTrack_XJC
+StationTrack_G4#FREE&SingleTrack_L17#FREE&SingleTrack_L35#FREE&Switch_3_G5_F&Switch_2_G13_F%~
+
+
+//左上发车 L17  XJC
+StationTrack_G1&SingleTrack_XFFC
+SingleTrack_L17#FREE&Switch_3_G7_D&Switch_2_G13_D%~
+StationTrack_G3&SingleTrack_XFFC
+SingleTrack_L17#FREE&Switch_3_G7_F&Switch_2_G13_D%~
+StationTrack_G2&SingleTrack_XFFC
+SingleTrack_L17#FREE&SingleTrack_L35#FREE&Switch_3_G5_D&Switch_2_G13_F%~
+StationTrack_G4&SingleTrack_XFFC
+SingleTrack_L17#FREE&SingleTrack_L35#FREE&Switch_3_G5_F&Switch_2_G13_F%~
+
+
+//左下接车 上行线反向接车 SFJC  SFJC
+StationTrack_G2&SingleTrack_SFJC
+StationTrack_G2#FREE&SingleTrack_L35#FREE&Switch_3_G5_D&Switch_2_G13_D%~
+StationTrack_G4&SingleTrack_SFJC
+StationTrack_G4#FREE&SingleTrack_L35#FREE&Switch_3_G5_F&Switch_2_G13_D%~
+
+
+//左下发车 上行线发车 SFC
+StationTrack_G2&SingleTrack_SFC
+SingleTrack_L35#FREE&Switch_3_G5_D&Switch_2_G13_D%~
+StationTrack_G4&SingleTrack_SFC
+SingleTrack_L35#FREE&Switch_3_G5_F&Switch_2_G13_D%~
+
+//右上发车 下行线发车XFC L28
+StationTrack_G1&SingleTrack_XFC
+SingleTrack_L28#FREE&Switch_3_G8_D&Switch_2_G24_D%~
+StationTrack_G3&SingleTrack_XFC
+SingleTrack_L28#FREE&Switch_3_G8_F&Switch_2_G24_D%~
+StationTrack_G2&SingleTrack_XFC
+SingleTrack_L28#FREE&SingleTrack_L46#FREE&Switch_3_G6_D&Switch_2_G24_F%~
+StationTrack_G4&SingleTrack_XFC
+SingleTrack_L28#FREE&SingleTrack_L46#FREE&Switch_3_G6_F&Switch_2_G24_F%~
+
+//右上接车 下行线反向接车XFJC L28 XFC
+StationTrack_G1&SingleTrack_XFJC
+StationTrack_G1#FREE&SingleTrack_L28#FREE&Switch_3_G8_D&Switch_2_G24_D%~
+StationTrack_G3&SingleTrack_XFJC
+StationTrack_G3#FREE&SingleTrack_L28#FREE&Switch_3_G8_F&Switch_2_G24_D%~
+StationTrack_G2&SingleTrack_XFJC
+StationTrack_G2#FREE&SingleTrack_L28#FREE&SingleTrack_L46#FREE&Switch_3_G6_D&Switch_2_G24_F%~
+StationTrack_G4&SingleTrack_XFJC
+StationTrack_G4#FREE&SingleTrack_L28#FREE&SingleTrack_L46#FREE&Switch_3_G6_F&Switch_2_G24_F%~
+
+//右下接车 上行线接车 SJC
+StationTrack_G2&SingleTrack_SJC
+StationTrack_G2#FREE&SingleTrack_L46#FREE&Switch_3_G6_D&Switch_2_G24_D%~
+StationTrack_G4&SingleTrack_SJC
+StationTrack_G4#FREE&SingleTrack_L46#FREE&Switch_3_G6_F&Switch_2_G24_D%~
+
+//右下发车 上行线反向发车 SFFC
+StationTrack_G2&SingleTrack_SFFC
+SingleTrack_L46#FREE&Switch_3_G6_D&Switch_2_G24_D%~
+StationTrack_G4&SingleTrack_SFFC
+SingleTrack_L46#FREE&Switch_3_G6_F&Switch_2_G24_D%~
+
