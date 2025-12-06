@@ -261,3 +261,18 @@ D:\Project\xiangmu\A - v1.2\BeijingSouthStation\obj\Debug\NanJingNanStation.南�
 D:\Project\xiangmu\A - v1.2\BeijingSouthStation\obj\Debug\NanJingNanStation.Form2.resources
 D:\Project\xiangmu\A - v1.2\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
 D:\Project\xiangmu\A - v1.2\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.GenerateResource.Cache
+D:\Project\gitcodes\CBI\BeijingSouthStation\obj\Debug\NanJingNanStation.csprojResolveAssemblyReference.cache
+D:\Project\gitcodes\CBI\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.ResolveComReference.cache
+D:\Project\gitcodes\CBI\BeijingSouthStation\obj\Debug\NanJingNanStation.南京南站.resources
+D:\Project\gitcodes\CBI\BeijingSouthStation\obj\Debug\NanJingNanStation.Form2.resources
+D:\Project\gitcodes\CBI\BeijingSouthStation\obj\Debug\BeijingSouthStation.Properties.Resources.resources
+D:\Project\gitcodes\CBI\BeijingSouthStation\obj\Debug\NanJingNanStation.csproj.GenerateResource.Cache
+D:\Project\gitcodes\CBI\BeijingSouthStation\obj\Debug\BeijingSouthStation.exe
+D:\Project\gitcodes\CBI\BeijingSouthStation\obj\Debug\BeijingSouthStation.pdb
+D:\Project\gitcodes\CBI\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe.config
+D:\Project\gitcodes\CBI\BeijingSouthStation\bin\Debug\BeijingSouthStation.exe
+D:\Project\gitcodes\CBI\BeijingSouthStation\bin\Debug\BeijingSouthStation.pdb
+D:\Project\gitcodes\CBI\BeijingSouthStation\bin\Debug\ConLib.dll
+D:\Project\gitcodes\CBI\BeijingSouthStation\bin\Debug\ExcelDataReader.dll
+D:\Project\gitcodes\CBI\BeijingSouthStation\bin\Debug\ConLib.pdb
+D:\Project\gitcodes\CBI\BeijingSouthStation\bin\Debug\ExcelDataReader.xml

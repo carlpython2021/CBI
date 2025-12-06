@@ -1270,25 +1270,33 @@ namespace NanJingNanStation
                     if (TRAIN_ROUTE.Count == 1)
                     {
                         // 取出TRAIN_ROUTE字典中的唯一键值对
+                        string TRAIN_ID="0";
+                        string JINLUSTATE ="0";
+
                         foreach (var kvp in TRAIN_ROUTE)
                         {
-                            var TRAIN_ID = kvp.Key;
-                            var JINLUSTTE = kvp.Value;
+                            TRAIN_ID = kvp.Key;
+                            JINLUSTATE = kvp.Value;
                             // 这里可以根据需求进一步处理onlyKey和onlyValue
                             break; // 只取第一个即可
                         }
+
+                        sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + TRAIN_ID +
+                                        "|" + TRAIN_ID + "|" + STOPSTATION + "|" + JINLUSTATE + "|" + "7" + "|" + "1"));
+
+                        // if (JINLUSTATE == "0")
+                        // {
+                        //     sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + TRAIN_ID +
+                        //                 "|" + TRAIN_ID + "|" + STOPSTATION + "|" + "2" + "|" + "7" + "|" + "1"));
+                        // }
+                        // else
+                        // {
+                        //     sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + TRAIN_ID +
+                        //                 "|" + TRAIN_ID + "|" + STOPSTATION + "|" + "2" + "|" + "7" + "|" + "1"));
+                        // }
                     }
 
-                    if (JINLUSTTE == '0')
-                    {
-                        sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + TRAIN_ID +
-                                    "|" + TRAIN_ID + "|" + STOPSTATION + "|" + "2" + "|" + "7" + "|" + "1"));
-                    }
-                    else
-                    {
-                        sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + TRAIN_ID +
-                                    "|" + TRAIN_ID + "|" + STOPSTATION + "|" + "2" + "|" + "7" + "|" + "1"));
-                    }
+                   
                     // sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + "G1234" + "|" +
                     //                  "G1234" + "|" + "NJ" + "|" + "2" + "|" + "7" + "|" + "1"));
 
@@ -1506,7 +1514,7 @@ namespace NanJingNanStation
             
             if (!TRAIN_ROUTE.ContainsKey(Train_ID))
             {
-                TRAIN_ROUTE.Add(Train_ID, '0');
+                TRAIN_ROUTE.Add(Train_ID, "0");
             }
 
             //如果是一辆新注册列车，默认为发车
@@ -1676,10 +1684,9 @@ namespace NanJingNanStation
                             if (isConflict(key, r)) //判断进路是否冲突
                             {
                                 lockRoute(r);
-                                TRAIN_ROUTE[Train_ID] = "1";
-
-                                sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                    "|" + Train_ID + "|" + STOPSTATION + "|" + "1" + "|" + "7" + "|" + "1"));
+                                // TRAIN_ROUTE[Train_ID] = "4";
+                                // sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
+                                //     "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
                                 if (timeToInterlock.ContainsKey(key1)) //判断计划是否有发车的进路
                                 {
                                     // 只有当接车时间和发车时间相同时，才在到达触发位置时建立发车进路（直通通过场景）
@@ -1691,7 +1698,7 @@ namespace NanJingNanStation
                                         if (isConflict(key1, r))
                                         {
                                             lockRoute(r);
-                                            TRAIN_ROUTE[Train_ID] = "1";
+                                            TRAIN_ROUTE[Train_ID] = "4";
 
                                             timeToInterlock.Remove(key1);
                                             // ===== 向RBC系统发送发车进路许可消息 =====
@@ -1725,25 +1732,44 @@ namespace NanJingNanStation
                                             //   输入消息："10|G1234|G1234|NJ|2|7|1"
                                             //   含义：G1234次列车在南京南站的发车进路已建立，授权级别7，状态有效
                                             sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID + "|" +
-                                                Train_ID + "|" + STOPSTATION + "|" + "2" + "|" + "7" + "|" + "1"));
+                                                Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
                                         }
                                         else
                                         {
                                             MessageBox.Show("进路冲突");
-                                            TRAIN_ROUTE[Train_ID] = "0";
+                                            TRAIN_ROUTE[Train_ID] = "6";
+                                            sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID + "|" +
+                                                Train_ID + "|" + STOPSTATION + "|" + "6" + "|" + "7" + "|" + "1"));
+                                        
 
                                         }
+                                    }
+                                    else
+                                    {
+                                        TRAIN_ROUTE[Train_ID] = "4";
+
+                                        sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
+                                    "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
                                     }
                                     // 注意：如果接车时间和发车时间不同（有停车时间），上面的if块不会执行
                                     // 此时发车进路（key1）仍保留在timeToInterlock中，不会在这里建立
                                     // 发车进路将由定时器函数currentTime_Tick()在发车时间到达时自动建立（见2479-2505行）
+                                }
+                                else
+                                {
+                                    TRAIN_ROUTE[Train_ID] = "4";
+                                    sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
+                                    "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
                                 }
                                 timeToInterlock.Remove(key);
                             }
                             else
                             {
                                 MessageBox.Show("进路冲突");
-                                TRAIN_ROUTE[Train_ID] = "0";
+                                TRAIN_ROUTE[Train_ID] = "6";
+                                sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID + "|" +
+                                                Train_ID + "|" + STOPSTATION + "|" + "6" + "|" + "7" + "|" + "1"));
+                                        
 
                             }
                         }
@@ -1756,7 +1782,7 @@ namespace NanJingNanStation
                             r = ((string)timeToInterlock[key]).Split(CSEPARATOR)[1];
                             lockRoute_multi(r);
                             sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                    "|" + Train_ID + "|" + STOPSTATION + "|" + "1" + "|" + "7" + "|" + "1"));
+                                    "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
                             if (timeToInterlock.ContainsKey(key1))
                             {
                                 string r1 = ((string)timeToInterlock[key]).Split(CSEPARATOR)[0];
@@ -1767,7 +1793,7 @@ namespace NanJingNanStation
                                     lockRoute_multi(r);
                                     timeToInterlock.Remove(key1);
                                     sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID + "|" +
-                                                Train_ID + "|" + STOPSTATION + "|" + "2" + "|" + "7" + "|" + "1"));
+                                                Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
                                 }
                             }
                             timeToInterlock.Remove(key);
@@ -1794,8 +1820,9 @@ namespace NanJingNanStation
                                 if (isConflict(key, r))
                                 {
                                     lockRoute(r);
-                                    sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                        "|" + Train_ID + "|" + STOPSTATION + "|" + "1" + "|" + "7" + "|" + "1"));
+                                    // TRAIN_ROUTE[Train_ID] = "4";
+                                    // sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
+                                    //     "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
                                     if (timeToInterlock.ContainsKey(key1))
                                     {
                                         if (((string)timeToInterlock[key]).Split(CSEPARATOR)[0] ==
@@ -1806,19 +1833,40 @@ namespace NanJingNanStation
                                             {
                                                 lockRoute(r);
                                                 timeToInterlock.Remove(key1);
+                                                TRAIN_ROUTE[Train_ID] = "4";
                                                 sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID + "|" +
-                                                    Train_ID + "|" + STOPSTATION + "|" + "2" + "|" + "7" + "|" + "1"));
+                                                    Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
                                             }
                                             else
                                             {
+                                                TRAIN_ROUTE[Train_ID] = "6";
+                                                sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID + "|" +
+                                                    Train_ID + "|" + STOPSTATION + "|" + "6" + "|" + "7" + "|" + "1"));
+                                            
                                                 MessageBox.Show("进路冲突");
                                             }
                                         }
+                                        else
+                                        {
+                                            TRAIN_ROUTE[Train_ID] = "4";
+                                            sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
+                                            "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
+                                        }
+                                    }
+                                    else
+                                    {
+                                        TRAIN_ROUTE[Train_ID] = "4";
+                                        sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
+                                        "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
                                     }
                                     timeToInterlock.Remove(key);
                                 }
                                 else
                                 {
+                                    TRAIN_ROUTE[Train_ID] = "6";
+                                    sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID + "|" +
+                                                    Train_ID + "|" + STOPSTATION + "|" + "6" + "|" + "7" + "|" + "1"));
+                                            
                                     MessageBox.Show("进路冲突");
                                 }
                             }
@@ -1831,7 +1879,7 @@ namespace NanJingNanStation
                                 r = ((string)timeToInterlock[key]).Split(CSEPARATOR)[1];
                                 lockRoute_multi(r);
                                 sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                        "|" + Train_ID + "|" + STOPSTATION + "|" + "1" + "|" + "7" + "|" + "1"));
+                                        "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
                                 if (timeToInterlock.ContainsKey(key1))
                                 {
                                     string r1 = ((string)timeToInterlock[key]).Split(CSEPARATOR)[0];
@@ -1841,7 +1889,7 @@ namespace NanJingNanStation
                                         r = ((string)timeToInterlock[key1]).Split(CSEPARATOR)[1];
                                         lockRoute_multi(r);
                                         sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                        "|" + Train_ID + "|" + STOPSTATION + "|" + "2" + "|" + "7" + "|" + "1"));
+                                        "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
                                         timeToInterlock.Remove(key1);
                                     }
                                 }
@@ -1866,8 +1914,9 @@ namespace NanJingNanStation
                                 if (isConflict(key, r))
                                 {
                                     lockRoute(r);
-                                    sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" +
-                                        Train_ID + "|" + Train_ID + "|" + STOPSTATION + "|" + "1" + "|" + "7" + "|" + "1"));
+                                    // TRAIN_ROUTE[Train_ID] = "4";
+                                    // sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" +
+                                    //     Train_ID + "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
                                     if (timeToInterlock.ContainsKey(key1))
                                     {
                                         if (((string)timeToInterlock[key]).Split(CSEPARATOR)[0] ==
@@ -1877,21 +1926,42 @@ namespace NanJingNanStation
                                             if (isConflict(key1, r))
                                             {
                                                 lockRoute(r);
+                                                TRAIN_ROUTE[Train_ID] = "4";
                                                 timeToInterlock.Remove(key1);
                                                 sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                                    "|" + Train_ID + "|" + STOPSTATION + "|" + "2" + "|" + "7" + "|" + "1"));
+                                                    "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
                                             }
                                             else
                                             {
+                                                TRAIN_ROUTE[Train_ID] = "6";
                                                 MessageBox.Show("进路冲突");
+                                                sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
+                                                    "|" + Train_ID + "|" + STOPSTATION + "|" + "6" + "|" + "7" + "|" + "1"));
+                                            
                                             }
                                         }
+                                        else
+                                        {
+                                            TRAIN_ROUTE[Train_ID] = "4";
+                                            sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
+                                            "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
+                                        }
+                                    }
+                                    else
+                                    {
+                                        TRAIN_ROUTE[Train_ID] = "4";
+                                        sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
+                                        "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
                                     }
                                     timeToInterlock.Remove(key);
                                 }
                                 else
                                 {
+                                    TRAIN_ROUTE[Train_ID] = "6";
                                     MessageBox.Show("进路冲突");
+                                    sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
+                                                    "|" + Train_ID + "|" + STOPSTATION + "|" + "6" + "|" + "7" + "|" + "1"));
+                                            
                                 }
                             }
                             Zhijietongguo = false;
@@ -1903,7 +1973,7 @@ namespace NanJingNanStation
                                 r = ((string)timeToInterlock[key]).Split(CSEPARATOR)[1];
                                 lockRoute_multi(r);
                                 sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                        "|" + Train_ID + "|" + STOPSTATION + "|" + "1" + "|" + "7" + "|" + "1"));
+                                        "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
                                 if (timeToInterlock.ContainsKey(key1))
                                 {
                                     string r1 = ((string)timeToInterlock[key]).Split(CSEPARATOR)[0];
@@ -1913,7 +1983,7 @@ namespace NanJingNanStation
                                         r = ((string)timeToInterlock[key1]).Split(CSEPARATOR)[1];
                                         lockRoute_multi(r);
                                         sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                        "|" + Train_ID + "|" + STOPSTATION + "|" + "2" + "|" + "7" + "|" + "1"));
+                                        "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
                                         timeToInterlock.Remove(key1);
                                     }
                                 }
@@ -3022,16 +3092,19 @@ namespace NanJingNanStation
             string r;                                  // 进路路径（如 "StationTrack_G3&SingleTrack_XFC"）
             string loc;                                // 位置条件（如 "StationTrack_G3" 或 "NO"）
 
-            if (!TRAIN_ROUTE.ContainsKey(Train_ID))
-            {
-                TRAIN_ROUTE.Add(Train_ID, '0');
-            }
+
+           
 
             // 遍历 timeToInterlock 字典中的所有进路计划
             // Key 示例："G1234NJDe下"（车次号4位 + 车站代码2位 + 进路类型 + 方向）
             // Value 示例："2025-01-01 10:00:00$StationTrack_G3&SingleTrack_XFC$StationTrack_G3"
             foreach (string key in timeToInterlock.Keys)
             {
+                string TRAIN_ID = key.Substring(0, ID_LENGTH);
+                if (!TRAIN_ROUTE.ContainsKey(TRAIN_ID))
+                {
+                    TRAIN_ROUTE.Add(TRAIN_ID, "0");
+                }
                 // ===== 步骤1：解析 timeToInterlock 中的进路信息 =====
                 // 使用 $ 分隔符拆分 Value，获取三个部分：
                 // [0] = 计划时间（如 "2025-01-01 10:00:00"）
@@ -3069,7 +3142,7 @@ namespace NanJingNanStation
                             {
                                 // 建立进路：锁闭相关道岔、设置信号机状态、占用相关轨道
                                 lockRoute(r);
-                                TRAIN_ROUTE[Train_ID] = "1";
+                                TRAIN_ROUTE[TRAIN_ID] = "1";
 
                                 
                                 // 记录需要删除的进路计划（已成功建立，不再需要保留在 timeToInterlock 中）
@@ -3090,7 +3163,7 @@ namespace NanJingNanStation
                                 //       输入消息："10|G123|G123|NJ|0|7|1"
                                 //       含义：G1234次列车在南京南站的发车进路已建立，可以授权列车发车
                                 sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + key.Substring(0, ID_LENGTH) + "|" +
-                                    key.Substring(0, ID_LENGTH) + "|" + key.Substring(ID_LENGTH, 2) + "|" + "0" + "|" + "7" + "|" + "1"));
+                                    key.Substring(0, ID_LENGTH) + "|" + key.Substring(ID_LENGTH, 2) + "|" + "4" + "|" + "7" + "|" + "1"));
                             }
                             else
                             {
@@ -3106,7 +3179,7 @@ namespace NanJingNanStation
                             
                             // 向RBC发送进路许可消息
                             sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + key.Substring(0, ID_LENGTH) + "|" +
-                                    key.Substring(0, ID_LENGTH) + "|" + key.Substring(ID_LENGTH, 2) + "|" + "0" + "|" + "7" + "|" + "1"));
+                                    key.Substring(0, ID_LENGTH) + "|" + key.Substring(ID_LENGTH, 2) + "|" + "4" + "|" + "7" + "|" + "1"));
                             
                             // 记录需要删除的进路计划
                             Deletestring[i] = key;

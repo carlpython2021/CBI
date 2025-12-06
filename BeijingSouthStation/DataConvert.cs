@@ -142,28 +142,57 @@ namespace NanJingNanStation
             // cbi.Split('|')[4]: 进路类型字段
             switch (cbi.Split('|')[4])
             {
+                
+                // case "0":  // 定时进路 (按时间自动触发)
+                //     // 编码值: 3
+                //     SA_TYPE = Convert.ToString(3, 2).PadLeft(8, '0');
+                //     break;
+                // case "1":  // 接车进路 (列车进站)
+                //     // 编码值: 1
+                //     SA_TYPE = Convert.ToString(1, 2).PadLeft(8, '0');
+                //     break;
+                // case "2":  // 发车进路 (列车出站) 
+                //     // 编码值: 2
+                //     SA_TYPE = Convert.ToString(2, 2).PadLeft(8, '0');
+                //     break;
+                // default:   // 未知类型
+                //     // 默认编码: 0
+                //     SA_TYPE = Convert.ToString(0, 2).PadLeft(8, '0');
+                    
+                //     break;
+
                 case "0":  // 定时进路 (按时间自动触发)
                     // 编码值: 3
-                    SA_TYPE = Convert.ToString(3, 2).PadLeft(8, '0');
+                    SA_TYPE = Convert.ToString(0, 2).PadLeft(8, '0');
+                    SA_STATE = Convert.ToString(0, 2).PadLeft(8, '0');
                     break;
-                case "1":  // 接车进路 (列车进站)
+                case "3":  // 接车进路 (列车进站)
                     // 编码值: 1
                     SA_TYPE = Convert.ToString(1, 2).PadLeft(8, '0');
+                    SA_STATE = Convert.ToString(3, 2).PadLeft(8, '0');
                     break;
-                case "2":  // 发车进路 (列车出站) 
+                case "4":  // 发车进路 (列车出站) 
                     // 编码值: 2
-                    SA_TYPE = Convert.ToString(2, 2).PadLeft(8, '0');
+                    SA_TYPE = Convert.ToString(3, 2).PadLeft(8, '0');
+                    SA_STATE = Convert.ToString(4, 2).PadLeft(8, '0');
+                    break;
+                case "6":  // 发车进路 (列车出站) 
+                    // 编码值: 2
+                    SA_TYPE = Convert.ToString(0, 2).PadLeft(8, '0');
+                    SA_STATE = Convert.ToString(6, 2).PadLeft(8, '0');
                     break;
                 default:   // 未知类型
                     // 默认编码: 0
                     SA_TYPE = Convert.ToString(0, 2).PadLeft(8, '0');
+                    SA_STATE = Convert.ToString(0, 2).PadLeft(8, '0');
                     break;
+
             }
 
             // SA_STATE: 进路状态 (8位) = 3
             // 固定值，表示这是列车进路状态
             // 可能取值: 3=列车进路 (正常运营状态)
-            SA_STATE = Convert.ToString(3, 2).PadLeft(8, '0');
+            //SA_STATE = Convert.ToString(3, 2).PadLeft(8, '0');
 
             // DEGRADATION: 降级标志 (8位) = 0
             // 固定值，表示系统运行正常，无降级
