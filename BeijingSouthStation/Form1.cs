@@ -50,11 +50,14 @@ namespace NanJingNanStation
         const string SEPARATOR = "$";
         const char CSEPARATOR = '$';
         const string IP = "127.0.0.1";
-        const int PORT = 1029;
-        const string RBCIP = "192.168.10.5";
+        //const string IP = "192.168.192.150";
+        const int PORT = 170;
+        const string RBCIP = "192.168.192.150";
         const int RBCPORT = 180;
         const string CTCIP = "192.168.10.4";
         const int CTCPORT = 180;
+        const string TCCIP = "192.168.192.232";
+        const int TCCPORT = 100;
         const string DOWNDIRECTION = "北京 --> 上海";
         const string UPDIRECTION = "上海 --> 北京";
         const int AHEAD = 3;
@@ -260,10 +263,10 @@ namespace NanJingNanStation
                 // str[1] = 方向标识（"S5"上行区间2、"X5"下行区间2、"S4"上行区间1、"X4"下行区间1）
                 // str[2] = 轨道编号（从1开始的序号）
                 string[] str = name.Split('_');
-                
+
                 // 创建码序显示控件实例
                 CodeOrder co = new CodeOrder();
-                
+
                 // 设置码序控件的位置：
                 // X坐标：区间轨道控件的中心位置（轨道X坐标 + 轨道宽度的一半 - 码序控件宽度的一半）
                 // Y坐标：区间轨道控件的上方3像素处（轨道Y坐标 - 3）
@@ -272,14 +275,14 @@ namespace NanJingNanStation
                     Convert.ToInt32(((SingleTrack_WithIJ)intervalTracks[name]).Location.X) +
                     ((SingleTrack_WithIJ)intervalTracks[name]).Width / 2 - co.Width / 2,
                     Convert.ToInt32(((SingleTrack_WithIJ)intervalTracks[name]).Location.Y) - 3);
-                
+
                 // 根据区间轨道的方向标识，设置码序控件的方向和初始显示状态
                 switch (str[1])
                 {
                     case UPINTEVAL_2:  // 上行区间2（S5）
                         // 设置码序方向为上行
                         co.上下行方向 = CodeOrder.Direction.上行;
-                        
+
                         // 根据轨道编号与区间总轨道数的关系，设置码序显示状态
                         // 码序规则：从车站向外，依次为"红黄-黄-黄绿-绿"
                         // 最接近车站的轨道（编号最大，等于upBlockNum_2）显示"红黄"
@@ -303,11 +306,11 @@ namespace NanJingNanStation
                             co.显示状态 = CodeOrder.CodeView.绿;  // 远离车站，显示绿码
                         }
                         break;
-                        
+
                     case DOWNINTEVAL_2:  // 下行区间2（X5）
                         // 设置码序方向为下行
                         co.上下行方向 = CodeOrder.Direction.下行;
-                        
+
                         // 下行区间2的码序显示逻辑与上行区间2相同
                         // 最接近车站的轨道（编号最大，等于downBlockNum_2）显示"红黄"
                         if (Convert.ToInt32(str[2]) == downBlockNum_2)
@@ -330,11 +333,11 @@ namespace NanJingNanStation
                             co.显示状态 = CodeOrder.CodeView.绿;
                         }
                         break;
-                        
+
                     case UPINTEVAL_1:  // 上行区间1（S4）
                         // 设置码序方向为上行
                         co.上下行方向 = CodeOrder.Direction.上行;
-                        
+
                         // 上行区间1的码序显示逻辑
                         // 最接近车站的轨道（编号最大，等于upBlockNum_1）显示"红黄"
                         if (Convert.ToInt32(str[2]) == upBlockNum_1)
@@ -357,11 +360,11 @@ namespace NanJingNanStation
                             co.显示状态 = CodeOrder.CodeView.绿;
                         }
                         break;
-                        
+
                     case DOWNINTEVAL_1:  // 下行区间1（X4）
                         // 设置码序方向为下行
                         co.上下行方向 = CodeOrder.Direction.下行;
-                        
+
                         // 下行区间1的码序显示逻辑
                         // 最接近车站的轨道（编号最大，等于downBlockNum_1）显示"红黄"
                         if (Convert.ToInt32(str[2]) == downBlockNum_1)
@@ -385,13 +388,13 @@ namespace NanJingNanStation
                         }
                         break;
                 }
-                
+
                 // 将码序控件添加到窗体控件集合中，使其在界面上可见
                 this.Controls.Add(co);
-                
+
                 // 将码序控件置于最前层，确保其显示在其他控件之上，不会被遮挡
                 co.BringToFront();
-                
+
                 // 将码序控件添加到codeOrders字典中，键为区间轨道名称，值为码序控件实例
                 // 这样后续可以通过区间轨道名称快速找到对应的码序控件，用于动态更新码序显示状态
                 codeOrders.Add(name, co);
@@ -561,30 +564,30 @@ namespace NanJingNanStation
                 // 例如："StationTrack_G1#FREE&SingleTrack_L1#FREE&Switch_3_G13_L#D&Switch_2_G12_L#F%~&SingleTrack_SFC#FREE"
                 string Interlock_str = (string)interlocks[Interlock_Info];
                 string[] str;
-                
+
                 // 如果找到了对应的进路表
                 if (Interlock_str != null)
                 {
                     // 将进路表字符串按'&'分割，得到进路中包含的所有设备信息数组
                     str = Interlock_str.Split('&');
-                    
+
                     // 将进路标识字符串按'&'分割，得到进路的起点和终点
                     // side[0] = 起点股道（如"StationTrack_G1"）
                     // side[1] = 终点信号机类型（如"SingleTrack_SFC"）
                     string[] side = Interlock_Info.Split('&');
-                    
+
                     // 将股道名称转换为信号机名称（用于查找信号机控件）
                     // 例如："StationTrack_G1" -> "Xinhaoji_G1"
                     side[0] = side[0].Replace("StationTrack", "Xinhaoji");
-                    
+
                     // 将信号机类型名称转换为信号机名称（用于查找信号机控件）
                     // 例如："SingleTrack_SFC" -> "Xinhaoji_SFC"
                     side[1] = side[1].Replace("SingleTrack", "Xinhaoji");
-                    
+
                     // 提取进路标识字符串的最后3个字符，用于判断进路类型（SFC、SJC、XFC、XJC）
                     // 这3个字符表示进路的类型：上行发车、上行接车、下行发车、下行接车
                     string JFC_state = Interlock_Info.Substring(Interlock_Info.Length - 3, 3);
-                    
+
                     // 根据进路类型设置信号机的显示状态
                     switch (JFC_state)
                     {
@@ -610,9 +613,9 @@ namespace NanJingNanStation
                                 ((Signal)signals[side[1]]).信号灯状态 = 2;  // 双黄灯
                             }
                             break;
-                        
+
                         case "XFFC":  // 下行反向发车 左上发车
-                        // case "L35": 
+                                      // case "L35": 
 
                             // 为股道信号机名称添加"_S"后缀，表示上行方向
                             // 例如："Xinhaoji_G1" -> "Xinhaoji_G1_S"
@@ -622,7 +625,7 @@ namespace NanJingNanStation
                             break;
 
                         case "SFC":  // 上行发车（上行方向发车进路） 左下发车
-                        // case "L35":  // 上行发车（上行方向发车进路）
+                                     // case "L35":  // 上行发车（上行方向发车进路）
 
                             // 为股道信号机名称添加"_S"后缀，表示上行方向
                             // 例如："Xinhaoji_G1" -> "Xinhaoji_G1_S"
@@ -652,7 +655,7 @@ namespace NanJingNanStation
                                 ((Signal)signals[side[1]]).信号灯状态 = 2;  // 双黄灯
                             }
                             break;
-                        
+
                         case "XFJC":  // 下行反向接车             右上接车         
                             side[1] = side[1].Replace("XFJC", "XFC");
                             if (side[0].Contains("1") || side[0].Contains("2"))
@@ -675,7 +678,7 @@ namespace NanJingNanStation
                             }
                             break;
 
-                            // case "L28":  // 下行发车（下行方向发车进路）
+                        // case "L28":  // 下行发车（下行方向发车进路）
                         case "XFC":  // 下行发车（下行方向发车进路）  右上发车
                             // 为股道信号机名称添加"_X"后缀，表示下行方向
                             // 例如："Xinhaoji_G1" -> "Xinhaoji_G1_X"
@@ -683,12 +686,12 @@ namespace NanJingNanStation
                             // 设置股道信号机状态为3（开放信号，允许发车）
                             ((Signal)signals[side[0]]).信号灯状态 = 3;
                             break;
-                        
-                        
+
+
 
                         case "SJC":  // 上行接车 右下接车
-                        // case "L46":  // 上行接车（上行方向接车进路）
-                            // 判断是否为G1或G2股道（这些股道可能有特殊的信号显示逻辑）
+                                     // case "L46":  // 上行接车（上行方向接车进路）
+                                     // 判断是否为G1或G2股道（这些股道可能有特殊的信号显示逻辑）
                             if (side[0].Contains("1") || side[0].Contains("2"))
                             {
                                 // 如果是直通通过（Zhijietongguo = true），显示开放信号（状态3）
@@ -708,7 +711,7 @@ namespace NanJingNanStation
                                 ((Signal)signals[side[1]]).信号灯状态 = 2;  // 双黄灯
                             }
                             break;
-                            
+
 
 
                         case "SFFC":  // 上行反向发车 右下发车
@@ -718,13 +721,13 @@ namespace NanJingNanStation
                             // 设置股道信号机状态为3（开放信号，允许发车）
                             ((Signal)signals[side[0]]).信号灯状态 = 3;
                             break;
-                            
-                        
-                       
-                        
-                    
+
+
+
+
+
                     }
-                    
+
                     // 遍历进路表中的所有设备，对每个设备进行锁闭操作
                     foreach (string tempName in str)
                     {
@@ -733,7 +736,7 @@ namespace NanJingNanStation
                         // name = "StationTrack_G1" 或 "Switch_3_G13_L" 或 "Switch_2_G12_L"
                         string name;
                         name = tempName.Split('#')[0];
-                        
+
                         // 处理站内股道（StationTrack）
                         if (name.Contains("StationTrack"))
                         {
@@ -775,7 +778,7 @@ namespace NanJingNanStation
                                 // tempName格式："Switch_3_G13_L#D" 或 "Switch_3_G13_L#F"
                                 // tempName.Split('#')[1] = "D"（定位）或 "F"（反位）
                                 bool dir = tempName.Split('#')[1] == "D";
-                                
+
                                 // 根据进路要求设置道岔的定反位
                                 if (dir)
                                 {
@@ -787,13 +790,13 @@ namespace NanJingNanStation
                                     // 设置为反位
                                     ((Switch_3)switches[name]).定反位 = Switch_3.DingFan.反位;
                                 }
-                                
+
                                 // 锁闭道岔（防止道岔在进路使用期间被操作）
                                 ((Switch_3)switches[name]).锁闭状态 = Switch_3.STATE.锁闭;
-                                
+
                                 // 将道岔控件置于最底层，确保轨道显示在道岔之上
                                 ((Switch_3)switches[name]).SendToBack();
-                                
+
                                 dir = false;  // 重置临时变量
                             }
                         }
@@ -808,7 +811,7 @@ namespace NanJingNanStation
                             string information;
                             direction = tempName.Split('%')[1];  // 提取方向信息
                             information = tempName.Split('#')[1];  // 提取位置和方向组合信息
-                            
+
                             // 检查双开道岔控件是否存在
                             if (((Switch_2)switches[name]) != null)
                             {
@@ -824,7 +827,7 @@ namespace NanJingNanStation
                                 {
                                     // 设置为定位
                                     ((Switch_2)switches[name]).定反位 = ConLib.Switch_2.DingFan.定位;
-                                    
+
                                     // 根据进路方向锁闭道岔的相应方向
                                     if (direction == "S")
                                     {
@@ -840,7 +843,7 @@ namespace NanJingNanStation
                             }
                         }
                     }
-                    
+
                     // 将已建立的进路添加到routes列表中，用于后续的进路管理和释放
                     routes.Add(Interlock_Info);
                 }
@@ -1071,13 +1074,13 @@ namespace NanJingNanStation
                 // 例如："StationTrack_G1#FREE&SingleTrack_L1#FREE&Switch_3_G13_L#D&Switch_2_G12_L#F%~&SingleTrack_SFC#FREE"
                 string Interlock_str = (string)interlocks[Interlock_Info];
                 string[] str;
-                
+
                 // 如果找到了对应的进路表
                 if (Interlock_str != null)
                 {
                     // 将进路表字符串按'&'分割，得到进路中包含的所有设备信息数组
                     str = Interlock_str.Split('&');
-                    
+
                     // 遍历进路表中的每个设备，检查其状态是否空闲
                     foreach (string tempName in str)
                     {
@@ -1086,7 +1089,7 @@ namespace NanJingNanStation
                         // name = "StationTrack_G1" 或 "Switch_3_G13_L"
                         string name;
                         name = tempName.Split('#')[0];
-                        
+
                         // 检查站内股道（StationTrack）
                         if (name.Contains("StationTrack"))
                         {
@@ -1152,7 +1155,7 @@ namespace NanJingNanStation
                             string information;
                             direction = tempName.Split('%')[1];      // 提取方向信息
                             information = tempName.Split('#')[1];    // 提取位置和方向组合信息
-                            
+
                             // 检查双开道岔控件是否存在
                             if (((Switch_2)switches[name]) != null)
                             {
@@ -1197,7 +1200,7 @@ namespace NanJingNanStation
                     }
                 }
             }
-            
+
             // 返回冲突检查结果
             // true：无冲突，可以建立进路
             // false：有冲突，不能建立进路
@@ -1214,8 +1217,8 @@ namespace NanJingNanStation
             while (true)
             {
                 try
-                {                   
-                     Console.WriteLine("w");
+                {
+                    Console.WriteLine("w");
 
                     EndPoint point = new IPEndPoint(IPAddress.Any, 0); // 保存发送方的ip和端口号
                     byte[] buffer = new byte[1024 * 1024];
@@ -1263,42 +1266,34 @@ namespace NanJingNanStation
                     //     * "2" = 发车进路（列车出发进路）← 当前消息类型
                     //   - "7"：授权级别，表示正常授权（最高安全级别）
                     //   - "1"：状态标识，表示消息有效/进路已建立
-                    
+
                     // sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
                     //                 "|" + Train_ID + "|" + STOPSTATION + "|" + "2" + "|" + "7" + "|" + "1"));
 
                     if (TRAIN_ROUTE.Count == 1)
                     {
                         // 取出TRAIN_ROUTE字典中的唯一键值对
-                        string TRAIN_ID="0";
-                        string JINLUSTATE ="0";
-
                         foreach (var kvp in TRAIN_ROUTE)
                         {
-                            TRAIN_ID = kvp.Key;
-                            JINLUSTATE = kvp.Value;
+                            var TRAIN_ID = kvp.Key;
+                            var JINLUSTTE = kvp.Value;
                             // 这里可以根据需求进一步处理onlyKey和onlyValue
                             break; // 只取第一个即可
                         }
-
-                        sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + TRAIN_ID +
-                                        "|" + TRAIN_ID + "|" + STOPSTATION + "|" + JINLUSTATE + "|" + "7" + "|" + "1"));
-
-                        // if (JINLUSTATE == "0")
-                        // {
-                        //     sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + TRAIN_ID +
-                        //                 "|" + TRAIN_ID + "|" + STOPSTATION + "|" + "2" + "|" + "7" + "|" + "1"));
-                        // }
-                        // else
-                        // {
-                        //     sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + TRAIN_ID +
-                        //                 "|" + TRAIN_ID + "|" + STOPSTATION + "|" + "2" + "|" + "7" + "|" + "1"));
-                        // }
                     }
-
-                   
-                    // sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + "G1234" + "|" +
-                    //                  "G1234" + "|" + "NJ" + "|" + "2" + "|" + "7" + "|" + "1"));
+                    /*
+                    if (JINLUSTTE == '0')
+                    {
+                        sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + TRAIN_ID +
+                                    "|" + TRAIN_ID + "|" + STOPSTATION + "|" + "2" + "|" + "7" + "|" + "1"));
+                    }
+                    else
+                    {
+                        sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + TRAIN_ID +
+                                    "|" + TRAIN_ID + "|" + STOPSTATION + "|" + "2" + "|" + "7" + "|" + "1"));
+                    }*/
+                    sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + "G1234" + "|" +
+                                      "G1234" + "|" + "NJ" + "|" + "2" + "|" + "7" + "|" + "1"));
 
                 }
                 catch (Exception ex)
@@ -1472,22 +1467,22 @@ namespace NanJingNanStation
                             sectionName = "singleTracks_L46";
                             break;
                         default:
-                            sectionName = "StationTrack_G"+i.ToString();
+                            sectionName = "StationTrack_G" + i.ToString();
                             break;
                     }
                     switch (segment)
                     {
                         case "0":
                             ((SingleTrack_WithIJ)singleTracks[sectionName]).flag_zt = 3;
-                            ((SingleTrack_WithIJ)singleTracks[sectionName]).Drawpic();                            
+                            ((SingleTrack_WithIJ)singleTracks[sectionName]).Drawpic();
                             break;
                         case "1":
                             ((SingleTrack_WithIJ)singleTracks[sectionName]).flag_zt = 1;
                             ((SingleTrack_WithIJ)singleTracks[sectionName]).Drawpic();
                             break;
                     }
-                    
-                    
+
+
                 }
 
             }
@@ -1511,7 +1506,7 @@ namespace NanJingNanStation
             string Train_Position = message.Split('|')[3];
             string Train_Direction = message.Split('|')[4];
             string Train_position = Train_Position;
-            
+
             if (!TRAIN_ROUTE.ContainsKey(Train_ID))
             {
                 TRAIN_ROUTE.Add(Train_ID, "0");
@@ -1657,7 +1652,7 @@ namespace NanJingNanStation
                 //CHUFA[Train_ID] DOWN_ARRIVE_BLOCK = "X4_18" DOWN_ARRIVE_BLOCK_FX = "S4_2";
                 // UP_ARRIVE_BLOCK = "S5_12" UP_ARRIVE_BLOCK_FX = "X5_2"
                 if (Train_Position == CHUFA[Train_ID])
-                {   
+                {
                     // 到达区间触发的位置
                     key = Train_ID + STOPSTATION + ARRIVE + DOWN_DIRECTION; //到达的进路
                     key1 = Train_ID + STOPSTATION + DEPARTURE + DOWN_DIRECTION; //发车的进路
@@ -1667,10 +1662,10 @@ namespace NanJingNanStation
                         {
                             //  timeToInterlock.Add(key + STOPSTATION + ARRIVE + dir,
                             //     arriveTime + SEPARATOR + arriveRoute + SEPARATOR + "QujianTrack_" + CHUFA[key]);
-                        
+
                             r = ((string)timeToInterlock[key]).Split(CSEPARATOR)[1]; //获取进路表中的进路arriveRoute
                             string r1 = ((string)timeToInterlock[key]).Split(CSEPARATOR)[0];
-                            
+
                             // 只有在发车进路存在时才比较时间，避免空引用异常
                             if (timeToInterlock.ContainsKey(key1))
                             {
@@ -1680,13 +1675,14 @@ namespace NanJingNanStation
                                     Zhijietongguo = true;
                                 }
                             }
-                            
+
                             if (isConflict(key, r)) //判断进路是否冲突
                             {
                                 lockRoute(r);
-                                // TRAIN_ROUTE[Train_ID] = "4";
-                                // sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                //     "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
+                                TRAIN_ROUTE[Train_ID] = "1";
+
+                                sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
+                                    "|" + Train_ID + "|" + STOPSTATION + "|" + "1" + "|" + "7" + "|" + "1"));
                                 if (timeToInterlock.ContainsKey(key1)) //判断计划是否有发车的进路
                                 {
                                     // 只有当接车时间和发车时间相同时，才在到达触发位置时建立发车进路（直通通过场景）
@@ -1698,7 +1694,7 @@ namespace NanJingNanStation
                                         if (isConflict(key1, r))
                                         {
                                             lockRoute(r);
-                                            TRAIN_ROUTE[Train_ID] = "4";
+                                            TRAIN_ROUTE[Train_ID] = "1";
 
                                             timeToInterlock.Remove(key1);
                                             // ===== 向RBC系统发送发车进路许可消息 =====
@@ -1732,44 +1728,25 @@ namespace NanJingNanStation
                                             //   输入消息："10|G1234|G1234|NJ|2|7|1"
                                             //   含义：G1234次列车在南京南站的发车进路已建立，授权级别7，状态有效
                                             sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID + "|" +
-                                                Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
+                                                Train_ID + "|" + STOPSTATION + "|" + "2" + "|" + "7" + "|" + "1"));
                                         }
                                         else
                                         {
                                             MessageBox.Show("进路冲突");
-                                            TRAIN_ROUTE[Train_ID] = "6";
-                                            sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID + "|" +
-                                                Train_ID + "|" + STOPSTATION + "|" + "6" + "|" + "7" + "|" + "1"));
-                                        
+                                            TRAIN_ROUTE[Train_ID] = "0";
 
                                         }
-                                    }
-                                    else
-                                    {
-                                        TRAIN_ROUTE[Train_ID] = "4";
-
-                                        sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                    "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
                                     }
                                     // 注意：如果接车时间和发车时间不同（有停车时间），上面的if块不会执行
                                     // 此时发车进路（key1）仍保留在timeToInterlock中，不会在这里建立
                                     // 发车进路将由定时器函数currentTime_Tick()在发车时间到达时自动建立（见2479-2505行）
-                                }
-                                else
-                                {
-                                    TRAIN_ROUTE[Train_ID] = "4";
-                                    sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                    "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
                                 }
                                 timeToInterlock.Remove(key);
                             }
                             else
                             {
                                 MessageBox.Show("进路冲突");
-                                TRAIN_ROUTE[Train_ID] = "6";
-                                sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID + "|" +
-                                                Train_ID + "|" + STOPSTATION + "|" + "6" + "|" + "7" + "|" + "1"));
-                                        
+                                TRAIN_ROUTE[Train_ID] = "0";
 
                             }
                         }
@@ -1782,7 +1759,7 @@ namespace NanJingNanStation
                             r = ((string)timeToInterlock[key]).Split(CSEPARATOR)[1];
                             lockRoute_multi(r);
                             sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                    "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
+                                    "|" + Train_ID + "|" + STOPSTATION + "|" + "1" + "|" + "7" + "|" + "1"));
                             if (timeToInterlock.ContainsKey(key1))
                             {
                                 string r1 = ((string)timeToInterlock[key]).Split(CSEPARATOR)[0];
@@ -1793,7 +1770,7 @@ namespace NanJingNanStation
                                     lockRoute_multi(r);
                                     timeToInterlock.Remove(key1);
                                     sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID + "|" +
-                                                Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
+                                                Train_ID + "|" + STOPSTATION + "|" + "2" + "|" + "7" + "|" + "1"));
                                 }
                             }
                             timeToInterlock.Remove(key);
@@ -1820,9 +1797,8 @@ namespace NanJingNanStation
                                 if (isConflict(key, r))
                                 {
                                     lockRoute(r);
-                                    // TRAIN_ROUTE[Train_ID] = "4";
-                                    // sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                    //     "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
+                                    sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
+                                        "|" + Train_ID + "|" + STOPSTATION + "|" + "1" + "|" + "7" + "|" + "1"));
                                     if (timeToInterlock.ContainsKey(key1))
                                     {
                                         if (((string)timeToInterlock[key]).Split(CSEPARATOR)[0] ==
@@ -1833,40 +1809,19 @@ namespace NanJingNanStation
                                             {
                                                 lockRoute(r);
                                                 timeToInterlock.Remove(key1);
-                                                TRAIN_ROUTE[Train_ID] = "4";
                                                 sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID + "|" +
-                                                    Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
+                                                    Train_ID + "|" + STOPSTATION + "|" + "2" + "|" + "7" + "|" + "1"));
                                             }
                                             else
                                             {
-                                                TRAIN_ROUTE[Train_ID] = "6";
-                                                sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID + "|" +
-                                                    Train_ID + "|" + STOPSTATION + "|" + "6" + "|" + "7" + "|" + "1"));
-                                            
                                                 MessageBox.Show("进路冲突");
                                             }
                                         }
-                                        else
-                                        {
-                                            TRAIN_ROUTE[Train_ID] = "4";
-                                            sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                            "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
-                                        }
-                                    }
-                                    else
-                                    {
-                                        TRAIN_ROUTE[Train_ID] = "4";
-                                        sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                        "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
                                     }
                                     timeToInterlock.Remove(key);
                                 }
                                 else
                                 {
-                                    TRAIN_ROUTE[Train_ID] = "6";
-                                    sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID + "|" +
-                                                    Train_ID + "|" + STOPSTATION + "|" + "6" + "|" + "7" + "|" + "1"));
-                                            
                                     MessageBox.Show("进路冲突");
                                 }
                             }
@@ -1879,7 +1834,7 @@ namespace NanJingNanStation
                                 r = ((string)timeToInterlock[key]).Split(CSEPARATOR)[1];
                                 lockRoute_multi(r);
                                 sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                        "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
+                                        "|" + Train_ID + "|" + STOPSTATION + "|" + "1" + "|" + "7" + "|" + "1"));
                                 if (timeToInterlock.ContainsKey(key1))
                                 {
                                     string r1 = ((string)timeToInterlock[key]).Split(CSEPARATOR)[0];
@@ -1889,7 +1844,7 @@ namespace NanJingNanStation
                                         r = ((string)timeToInterlock[key1]).Split(CSEPARATOR)[1];
                                         lockRoute_multi(r);
                                         sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                        "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
+                                        "|" + Train_ID + "|" + STOPSTATION + "|" + "2" + "|" + "7" + "|" + "1"));
                                         timeToInterlock.Remove(key1);
                                     }
                                 }
@@ -1914,9 +1869,8 @@ namespace NanJingNanStation
                                 if (isConflict(key, r))
                                 {
                                     lockRoute(r);
-                                    // TRAIN_ROUTE[Train_ID] = "4";
-                                    // sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" +
-                                    //     Train_ID + "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
+                                    sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" +
+                                        Train_ID + "|" + Train_ID + "|" + STOPSTATION + "|" + "1" + "|" + "7" + "|" + "1"));
                                     if (timeToInterlock.ContainsKey(key1))
                                     {
                                         if (((string)timeToInterlock[key]).Split(CSEPARATOR)[0] ==
@@ -1926,42 +1880,21 @@ namespace NanJingNanStation
                                             if (isConflict(key1, r))
                                             {
                                                 lockRoute(r);
-                                                TRAIN_ROUTE[Train_ID] = "4";
                                                 timeToInterlock.Remove(key1);
                                                 sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                                    "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
+                                                    "|" + Train_ID + "|" + STOPSTATION + "|" + "2" + "|" + "7" + "|" + "1"));
                                             }
                                             else
                                             {
-                                                TRAIN_ROUTE[Train_ID] = "6";
                                                 MessageBox.Show("进路冲突");
-                                                sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                                    "|" + Train_ID + "|" + STOPSTATION + "|" + "6" + "|" + "7" + "|" + "1"));
-                                            
                                             }
                                         }
-                                        else
-                                        {
-                                            TRAIN_ROUTE[Train_ID] = "4";
-                                            sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                            "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
-                                        }
-                                    }
-                                    else
-                                    {
-                                        TRAIN_ROUTE[Train_ID] = "4";
-                                        sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                        "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
                                     }
                                     timeToInterlock.Remove(key);
                                 }
                                 else
                                 {
-                                    TRAIN_ROUTE[Train_ID] = "6";
                                     MessageBox.Show("进路冲突");
-                                    sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                                    "|" + Train_ID + "|" + STOPSTATION + "|" + "6" + "|" + "7" + "|" + "1"));
-                                            
                                 }
                             }
                             Zhijietongguo = false;
@@ -1973,7 +1906,7 @@ namespace NanJingNanStation
                                 r = ((string)timeToInterlock[key]).Split(CSEPARATOR)[1];
                                 lockRoute_multi(r);
                                 sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                        "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
+                                        "|" + Train_ID + "|" + STOPSTATION + "|" + "1" + "|" + "7" + "|" + "1"));
                                 if (timeToInterlock.ContainsKey(key1))
                                 {
                                     string r1 = ((string)timeToInterlock[key]).Split(CSEPARATOR)[0];
@@ -1983,7 +1916,7 @@ namespace NanJingNanStation
                                         r = ((string)timeToInterlock[key1]).Split(CSEPARATOR)[1];
                                         lockRoute_multi(r);
                                         sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                        "|" + Train_ID + "|" + STOPSTATION + "|" + "4" + "|" + "7" + "|" + "1"));
+                                        "|" + Train_ID + "|" + STOPSTATION + "|" + "2" + "|" + "7" + "|" + "1"));
                                         timeToInterlock.Remove(key1);
                                     }
                                 }
@@ -1993,18 +1926,18 @@ namespace NanJingNanStation
                         break;
                 }
                 #endregion
-                
+
                 // ===== 处理列车在区间一般位置的情况 =====
                 // 当列车位置不是特定的到达触发块（DOWN_ARRIVE_BLOCK、UP_ARRIVE_BLOCK）或CHUFA位置时，
                 // 说明列车在区间的普通位置（如 X4_15、S5_8 等区间轨道块）
                 // 这些位置标识格式为：方向标识_编号，例如 "X4_15"（下行区间1的第15块）、"S5_8"（上行区间2的第8块）
-                
+
                 // 将区间位置标识转换为区间轨道控件名称
                 // Train_Position 格式：如 "X4_15"、"S5_8"、"X5_12"、"S4_18" 等
                 // Train_position 格式：如 "QujianTrack_X4_15"、"QujianTrack_S5_8" 等
                 // 这样可以在 intervalTracks 字典中查找对应的区间轨道控件
                 Train_position = "QujianTrack_" + Train_Position;
-                
+
                 // 更新列车在界面上的位置显示
                 // 该函数会：
                 // 1. 将列车图标移动到对应的区间轨道控件位置
@@ -2012,7 +1945,7 @@ namespace NanJingNanStation
                 // 3. 更新码序显示（根据列车位置更新前方区间的码序颜色）
                 // 4. 释放上一个位置的占用状态
                 updateTrainPosition(Train_ID, Train_position, Train_Direction);
-                
+
                 // 检查列车是否刚从车站内进入区间
                 // 这个检查用于清理发车进路记录，因为列车一旦离开车站进入区间，发车进路就应该被清除
                 if (((Train)trains[Train_ID]).Train_Location != null)
@@ -2025,18 +1958,18 @@ namespace NanJingNanStation
                         // 构造发车进路的键值
                         // 格式："{车次}{车站代码}De{方向}"
                         // 例如："G1234NJDe下" 表示 G1234 次列车在南京南站下行发车进路
-                        
+
                         // 注释掉的代码：原本会调用 clearRoute 释放发车进路
                         // 但这里只移除记录，不释放进路，可能是因为列车已经离开，进路会自动释放
                         //clearRoute((string)trainToInterlock[Train_ID + STOPSTATION + DEPARTURE + Dir]);
-                        
+
                         // 从 trainToInterlock 字典中移除发车进路记录
                         // 因为列车已经离开车站，发车进路不再需要，可以清除记录
                         // 这样可以避免后续误判或重复处理
                         trainToInterlock.Remove(Train_ID + STOPSTATION + DEPARTURE + Dir);
                     }
                 }
-                
+
                 // 更新列车的当前位置记录
                 // 将当前计算出的位置（区间轨道控件名称）保存到列车的 Train_Location 属性中
                 // 这样下次位置更新时，可以通过比较新旧位置判断列车的移动状态
@@ -2467,7 +2400,7 @@ namespace NanJingNanStation
                     {
                         timeToInterlock.Remove(key + STOPSTATION + ARRIVE + dir);
                         trainToInterlock.Remove(key + STOPSTATION + ARRIVE + dir);
-                        
+
                         //将区间的触发条件通过 CHUFA 变量写入timeToInterlock
                         if (dir == DOWN_DIRECTION)
                         {
@@ -2719,7 +2652,7 @@ namespace NanJingNanStation
                     // 获取当前轨道段的码序控件名称
                     // 示例：c = "QujianTrack_X4_15"
                     c = "QujianTrack_" + last_positon.Split('_')[1] + "_" + Convert.ToString(num - 1);
-                    
+
                     // 显示码序控件（Visible = true）
                     ((CodeOrder)codeOrders[c]).Visible = true;
 
@@ -2734,7 +2667,7 @@ namespace NanJingNanStation
                         // 构造轨道段名称
                         // 示例：i=14 → c = "QujianTrack_X4_14"
                         c = "QujianTrack_" + last_positon.Split('_')[1] + "_" + Convert.ToString(i);
-                        
+
                         // 检查轨道段是否为空闲状态（flag_zt == 3）
                         if (((SingleTrack_WithIJ)intervalTracks[c]).flag_zt == 3)
                         {
@@ -2774,10 +2707,10 @@ namespace NanJingNanStation
                 // ===== 步骤7：删除列车对象 =====
                 // 获取列车对象引用
                 train = (Train)trains[message.Split('|')[1]];
-                
+
                 // 从 trains 字典中移除列车对象
                 trains.Remove(message.Split('|')[1]);
-                
+
                 // 从界面控件集合中移除列车控件（从界面上删除列车显示）
                 this.Controls.Remove(train);
 
@@ -2894,7 +2827,7 @@ namespace NanJingNanStation
             // ===== 步骤2：解析方向和方向标识 =====
             string s = "";      // 方向字符串（"下" 或 "上"）
             string s3 = "";     // 方向字母标识（"X"=下行 或 "S"=上行）
-            
+
             // 从消息第3个字段（车次+方向）的最后一位提取方向标识
             // "1" = 下行方向，"0" = 上行方向
             // 示例："G12341" → 最后一位是 "1" → 下行
@@ -2952,7 +2885,7 @@ namespace NanJingNanStation
             // ===== 步骤8：关闭相关信号机 =====
             // 根据进路类型（接车或发车）构造信号机名称，并将其状态设置为5（灭灯状态）
             string s2 = "Xinhaoji_";  // 信号机名称前缀
-            
+
             if (message.Split('|')[4] == DEPARTURE)
             {
                 // 发车进路：从进路路径的第一个轨道（股道）提取信号机名称
@@ -2971,7 +2904,7 @@ namespace NanJingNanStation
                 //       → 信号机名称："Xinhaoji_SJC"（上行接车信号机）
                 s2 = s2 + message.Split('|')[1].Split('&')[1].Split('_')[1];
             }
-            
+
             // 将信号机状态设置为5（灭灯状态）
             // 状态5通常表示信号机关闭，不显示任何信号
             ((Signal)signals[s2]).信号灯状态 = 5;
@@ -2993,7 +2926,7 @@ namespace NanJingNanStation
         /// this.currentTime = new System.Windows.Forms.Timer(this.components);
         /// 窗体加载后（Form1_Load 执行时）自动启动
         /// 无需手动调用 Start()，因为 Enabled = true
-         /// // 第385-389行：定时器配置
+        /// // 第385-389行：定时器配置
         /// this.currentTime.Enabled = true;        // 默认启用，自动运行
         /// this.currentTime.Interval = 500;        // 触发间隔：500毫秒（0.5秒）
         /// this.currentTime.Tick += new System.EventHandler(this.currentTime_Tick);  // 绑定事件
@@ -3093,152 +3026,152 @@ namespace NanJingNanStation
             string loc;                                // 位置条件（如 "StationTrack_G3" 或 "NO"）
 
 
-           
-
             // 遍历 timeToInterlock 字典中的所有进路计划
             // Key 示例："G1234NJDe下"（车次号4位 + 车站代码2位 + 进路类型 + 方向）
             // Value 示例："2025-01-01 10:00:00$StationTrack_G3&SingleTrack_XFC$StationTrack_G3"
             foreach (string key in timeToInterlock.Keys)
             {
-                string TRAIN_ID = key.Substring(0, ID_LENGTH);
-                if (!TRAIN_ROUTE.ContainsKey(TRAIN_ID))
-                {
-                    TRAIN_ROUTE.Add(TRAIN_ID, "0");
-                }
-                // ===== 步骤1：解析 timeToInterlock 中的进路信息 =====
-                // 使用 $ 分隔符拆分 Value，获取三个部分：
-                // [0] = 计划时间（如 "2025-01-01 10:00:00"）
-                // [1] = 进路路径（如 "StationTrack_G3&SingleTrack_XFC"）
-                // [2] = 位置条件（如 "StationTrack_G3" 或 "NO"）
-                Time = Convert.ToDateTime(((string)timeToInterlock[key]).Split(CSEPARATOR)[0]);
-                r = ((string)timeToInterlock[key]).Split(CSEPARATOR)[1];
-                loc = ((string)timeToInterlock[key]).Split(CSEPARATOR)[2];
+                string Train_ID = key.Substring(0, ID_LENGTH);
 
-                // ===== 步骤2：判断位置条件类型 =====
-                if (loc != "NO")
+                if (!TRAIN_ROUTE.ContainsKey(Train_ID))
                 {
-                    // 【情况A：有位置限制的进路（主要是发车进路）】
-                    // 需要同时满足时间条件和位置条件才能建立进路
-                    
-                    // 触发条件1：时间条件 - 当前时间 + 3秒 >= 计划时间（提前3秒触发）
-                    // 触发条件2：位置条件 - 列车必须在指定的股道上
-                    // 触发条件3：进路类型 - 必须是发车进路（DEPARTURE）
-                    // 
-                    // key.Substring(0, ID_LENGTH) 提取车次号（前4位，如 "G123"）
-                    // trainToTrack["G1234"] 获取该列车的当前位置（如 "StationTrack_G3"）
-                    // 
-                    // 示例：如果计划时间是 10:00:00，当前时间是 09:59:57，则满足时间条件
-                    //       如果列车G1234在 "StationTrack_G3"，且 loc = "StationTrack_G3"，则满足位置条件
-                    if (DateTime.Compare(DateTime.Now.AddSeconds(AHEAD), Time) > 0 &&
-                        (string)trainToTrack[key.Substring(0, ID_LENGTH)] == loc && key.Contains(DEPARTURE))
+                    TRAIN_ROUTE.Add(Train_ID, "0");
+
+                    // ===== 步骤1：解析 timeToInterlock 中的进路信息 =====
+                    // 使用 $ 分隔符拆分 Value，获取三个部分：
+                    // [0] = 计划时间（如 "2025-01-01 10:00:00"）
+                    // [1] = 进路路径（如 "StationTrack_G3&SingleTrack_XFC"）
+                    // [2] = 位置条件（如 "StationTrack_G3" 或 "NO"）
+                    Time = Convert.ToDateTime(((string)timeToInterlock[key]).Split(CSEPARATOR)[0]);
+                    r = ((string)timeToInterlock[key]).Split(CSEPARATOR)[1];
+                    loc = ((string)timeToInterlock[key]).Split(CSEPARATOR)[2];
+
+                    // ===== 步骤2：判断位置条件类型 =====
+                    if (loc != "NO")
                     {
-                        // ===== 步骤3A：建立发车进路 =====
-                        // 根据联锁模式选择不同的进路建立方式
-                        if (mode_interlock == "normal")
-                        {
-                            // 【单车模式】一次只允许一列车占用进路
-                            // 检查进路是否与已建立的进路冲突（检查道岔、轨道是否被占用）
-                            if (isConflict(key, r))
-                            {
-                                // 建立进路：锁闭相关道岔、设置信号机状态、占用相关轨道
-                                lockRoute(r);
-                                TRAIN_ROUTE[TRAIN_ID] = "1";
+                        // 【情况A：有位置限制的进路（主要是发车进路）】
+                        // 需要同时满足时间条件和位置条件才能建立进路
 
-                                
-                                // 记录需要删除的进路计划（已成功建立，不再需要保留在 timeToInterlock 中）
-                                Deletestring[i] = key;
-                                i++;
-                                
-                                // ===== 向RBC系统发送进路许可消息 =====
-                                // 消息格式："10|Train_ID|Train_ID|STATION|进路类型|授权级别|状态"
-                                // - "10"：消息类型标识（进路许可消息）
-                                // - Train_ID（第1个）：车次号，从key的前4位提取（如 "G123"）
-                                // - Train_ID（第2个）：车次号重复（协议要求）
-                                // - STATION：车站代码，从key的第5-6位提取（如 "NJ"）
-                                // - "0"：进路类型（"0"=定时进路，按计划时间触发）
-                                // - "7"：授权级别（最高安全级别）
-                                // - "1"：状态标识（进路已建立，状态有效）
-                                // 
-                                // 示例：G1234次列车在南京南站下行发车
-                                //       输入消息："10|G123|G123|NJ|0|7|1"
-                                //       含义：G1234次列车在南京南站的发车进路已建立，可以授权列车发车
-                                sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + key.Substring(0, ID_LENGTH) + "|" +
-                                    key.Substring(0, ID_LENGTH) + "|" + key.Substring(ID_LENGTH, 2) + "|" + "4" + "|" + "7" + "|" + "1"));
+                        // 触发条件1：时间条件 - 当前时间 + 3秒 >= 计划时间（提前3秒触发）
+                        // 触发条件2：位置条件 - 列车必须在指定的股道上
+                        // 触发条件3：进路类型 - 必须是发车进路（DEPARTURE）
+                        // 
+                        // key.Substring(0, ID_LENGTH) 提取车次号（前4位，如 "G123"）
+                        // trainToTrack["G1234"] 获取该列车的当前位置（如 "StationTrack_G3"）
+                        // 
+                        // 示例：如果计划时间是 10:00:00，当前时间是 09:59:57，则满足时间条件
+                        //       如果列车G1234在 "StationTrack_G3"，且 loc = "StationTrack_G3"，则满足位置条件
+                        if (DateTime.Compare(DateTime.Now.AddSeconds(AHEAD), Time) > 0 &&
+                            (string)trainToTrack[key.Substring(0, ID_LENGTH)] == loc && key.Contains(DEPARTURE))
+                        {
+                            // ===== 步骤3A：建立发车进路 =====
+                            // 根据联锁模式选择不同的进路建立方式
+                            if (mode_interlock == "normal")
+                            {
+                                // 【单车模式】一次只允许一列车占用进路
+                                // 检查进路是否与已建立的进路冲突（检查道岔、轨道是否被占用）
+                                if (isConflict(key, r))
+                                {
+                                    // 建立进路：锁闭相关道岔、设置信号机状态、占用相关轨道
+                                    lockRoute(r);
+                                    TRAIN_ROUTE[Train_ID] = "1";
+
+
+                                    // 记录需要删除的进路计划（已成功建立，不再需要保留在 timeToInterlock 中）
+                                    Deletestring[i] = key;
+                                    i++;
+
+                                    // ===== 向RBC系统发送进路许可消息 =====
+                                    // 消息格式："10|Train_ID|Train_ID|STATION|进路类型|授权级别|状态"
+                                    // - "10"：消息类型标识（进路许可消息）
+                                    // - Train_ID（第1个）：车次号，从key的前4位提取（如 "G123"）
+                                    // - Train_ID（第2个）：车次号重复（协议要求）
+                                    // - STATION：车站代码，从key的第5-6位提取（如 "NJ"）
+                                    // - "0"：进路类型（"0"=定时进路，按计划时间触发）
+                                    // - "7"：授权级别（最高安全级别）
+                                    // - "1"：状态标识（进路已建立，状态有效）
+                                    // 
+                                    // 示例：G1234次列车在南京南站下行发车
+                                    //       输入消息："10|G123|G123|NJ|0|7|1"
+                                    //       含义：G1234次列车在南京南站的发车进路已建立，可以授权列车发车
+                                    sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + key.Substring(0, ID_LENGTH) + "|" +
+                                        key.Substring(0, ID_LENGTH) + "|" + key.Substring(ID_LENGTH, 2) + "|" + "0" + "|" + "7" + "|" + "1"));
+                                }
+                                else
+                                {
+                                    // 进路冲突：道岔或轨道已被其他列车占用，无法建立进路
+                                    MessageBox.Show("进路冲突");
+                                }
                             }
                             else
                             {
-                                // 进路冲突：道岔或轨道已被其他列车占用，无法建立进路
-                                MessageBox.Show("进路冲突");
-                            }
-                        }
-                        else
-                        {
-                            // 【多车模式】允许多列车共用进路（适用于追踪运行）
-                            // 直接建立进路，不检查冲突（多车模式下的冲突处理由其他机制保证）
-                            lockRoute_multi(r);
-                            
-                            // 向RBC发送进路许可消息
-                            sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + key.Substring(0, ID_LENGTH) + "|" +
-                                    key.Substring(0, ID_LENGTH) + "|" + key.Substring(ID_LENGTH, 2) + "|" + "4" + "|" + "7" + "|" + "1"));
-                            
-                            // 记录需要删除的进路计划
-                            Deletestring[i] = key;
-                            i++;
-                        }
-                    }
-                    // 注意：如果时间或位置条件不满足，该进路计划会继续保留在 timeToInterlock 中，等待下次定时检查
-                }
-                else
-                {
-                    // 【情况B：无位置限制的定时进路（loc == "NO"）】
-                    // 仅根据时间条件触发，不需要验证列车位置
-                    // 适用于不需要位置验证的定时进路计划
-                    
-                    // 触发条件：当前时间 + 3秒 >= 计划时间（提前3秒触发）
-                    if (DateTime.Compare(DateTime.Now.AddSeconds(AHEAD), Time) > 0)
-                    {
-                        // ===== 步骤3B：建立定时进路 =====
-                        if (mode_interlock == "normal")
-                        {
-                            // 【单车模式】检查冲突后再建立
-                            if (isConflict(key, r))
-                            {
-                                // 建立进路
-                                lockRoute(r);
-                                
+                                // 【多车模式】允许多列车共用进路（适用于追踪运行）
+                                // 直接建立进路，不检查冲突（多车模式下的冲突处理由其他机制保证）
+                                lockRoute_multi(r);
+
+                                // 向RBC发送进路许可消息
+                                sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + key.Substring(0, ID_LENGTH) + "|" +
+                                        key.Substring(0, ID_LENGTH) + "|" + key.Substring(ID_LENGTH, 2) + "|" + "0" + "|" + "7" + "|" + "1"));
+
                                 // 记录需要删除的进路计划
                                 Deletestring[i] = key;
                                 i++;
-                                // 注意：无位置限制的定时进路通常不发送RBC消息（可能已通过其他方式处理）
+                            }
+                        }
+                        // 注意：如果时间或位置条件不满足，该进路计划会继续保留在 timeToInterlock 中，等待下次定时检查
+                    }
+                    else
+                    {
+                        // 【情况B：无位置限制的定时进路（loc == "NO"）】
+                        // 仅根据时间条件触发，不需要验证列车位置
+                        // 适用于不需要位置验证的定时进路计划
+
+                        // 触发条件：当前时间 + 3秒 >= 计划时间（提前3秒触发）
+                        if (DateTime.Compare(DateTime.Now.AddSeconds(AHEAD), Time) > 0)
+                        {
+                            // ===== 步骤3B：建立定时进路 =====
+                            if (mode_interlock == "normal")
+                            {
+                                // 【单车模式】检查冲突后再建立
+                                if (isConflict(key, r))
+                                {
+                                    // 建立进路
+                                    lockRoute(r);
+
+                                    // 记录需要删除的进路计划
+                                    Deletestring[i] = key;
+                                    i++;
+                                    // 注意：无位置限制的定时进路通常不发送RBC消息（可能已通过其他方式处理）
+                                }
+                                else
+                                {
+                                    // 进路冲突
+                                    MessageBox.Show("进路冲突");
+                                }
                             }
                             else
                             {
-                                // 进路冲突
-                                MessageBox.Show("进路冲突");
+                                // 【多车模式】直接建立进路
+                                lockRoute_multi(r);
+
+                                // 记录需要删除的进路计划
+                                Deletestring[i] = key;
+                                i++;
                             }
-                        }
-                        else
-                        {
-                            // 【多车模式】直接建立进路
-                            lockRoute_multi(r);
-                            
-                            // 记录需要删除的进路计划
-                            Deletestring[i] = key;
-                            i++;
                         }
                     }
                 }
-            }
-            
-            // ===== 步骤4：清理已成功建立的进路计划 =====
-            // 删除已成功建立进路的计划项，避免重复处理
-            // 注意：使用延迟删除机制，先记录到 Deletestring 数组，最后统一删除
-            // 这样可以在遍历集合时安全地删除元素（避免在遍历过程中修改集合导致异常）
-            for (int j = 0; j < Deletestring.Length; j++)
-            {
-                if (Deletestring[j] != null)
+
+                // ===== 步骤4：清理已成功建立的进路计划 =====
+                // 删除已成功建立进路的计划项，避免重复处理
+                // 注意：使用延迟删除机制，先记录到 Deletestring 数组，最后统一删除
+                // 这样可以在遍历集合时安全地删除元素（避免在遍历过程中修改集合导致异常）
+                for (int j = 0; j < Deletestring.Length; j++)
                 {
-                    timeToInterlock.Remove(Deletestring[j]);
+                    if (Deletestring[j] != null)
+                    {
+                        timeToInterlock.Remove(Deletestring[j]);
+                    }
                 }
             }
         }
@@ -3254,6 +3187,12 @@ namespace NanJingNanStation
             string message = (string)obj;
             server.SendTo(Encoding.UTF8.GetBytes(message), point);
         }
+        public void sendMessageToTCC(object obj)
+        {
+            EndPoint point = new IPEndPoint(IPAddress.Parse(TCCIP), TCCPORT);
+            string message = (string)obj;
+            server.SendTo(Encoding.UTF8.GetBytes(message), point);
+        }
         public void sendMessageToRBC(object obj)
         {
             EndPoint point = new IPEndPoint(IPAddress.Parse(RBCIP), RBCPORT);
@@ -3265,8 +3204,8 @@ namespace NanJingNanStation
             lockRoute(textBox1.Text);
             //string Train_ID = '111';
 
-           // sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
-                                   // "|" + Train_ID + "|" + STOPSTATION + "|" + "1" + "|" + "7" + "|" + "1"));
+            // sendMessageToRBC(DataConvert.CBIToRBC("10" + "|" + Train_ID +
+            // "|" + Train_ID + "|" + STOPSTATION + "|" + "1" + "|" + "7" + "|" + "1"));
         }
 
         private void 南京南站_FormClosing(object sender, FormClosingEventArgs e)
@@ -3356,6 +3295,21 @@ namespace NanJingNanStation
 
         private void button2_Click(object sender, EventArgs e)
         {
+
+            Console.WriteLine("!!!");
+            string SDCC;               // 车站标识 (32位)
+            string RI;
+            //sendMessagetocbi();
+            // RB: 64位全1的二进制数
+            SDCC = Convert.ToString(-1, 2).Substring(32).PadLeft(64, '1');
+            // SSS: 128位全1的二进制数
+            RI = new string('0', 1200);
+
+            sendMessageToTCC(DataConvert.CBIToTCC(SDCC + "|" + RI));
+            Console.WriteLine(SDCC);
+            Console.WriteLine(RI);
+
+            Console.WriteLine(DataConvert.CBIToTCC(SDCC + "|" + RI));
             // clearRoute(textBox2.Text);
             //if (buttonvalue == 0)
             //{
@@ -3419,10 +3373,30 @@ namespace NanJingNanStation
             */
         }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+            Console.WriteLine("!!!");
+            string SDCC;               // 车站标识 (32位)
+            string RI;
+            //sendMessagetocbi();
+            // RB: 64位全1的二进制数
+            SDCC = Convert.ToString(-1, 2).Substring(32).PadLeft(64, '1');
+            // SSS: 128位全1的二进制数
+            RI = new string('0', 1200);
+
+            //sendMessageToTCC(DataConvert.CBIToTCC(SDCC + "|" + RI));
+            Console.WriteLine(SDCC);
+            Console.WriteLine(RI);
+
+            Console.WriteLine(DataConvert.CBIToTCC(SDCC + "|" + RI));
+        }
 
         private void button3_Click(object sender, EventArgs e)
         {
             sendMessage(textBox3.Text);
         }
+
+        
     }
 }
